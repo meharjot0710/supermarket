@@ -37,17 +37,6 @@ const Footer = () => {
               </div>
             </div>
           </div>
-          <div className="text-center text-[9px] tracking-widest text-secondary-foreground/20 uppercase">
-            Designed & Developed by{" "}
-            <a
-              href="https://zyrixcraft.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-secondary-foreground/50 transition-colors underline"
-            >
-              ZyrixCraft.com
-            </a>
-          </div>
         </div>
       </ScrollReveal>
     </footer>
