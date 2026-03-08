@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+import { toast } from "sonner";
 import ScrollReveal from "@/components/ScrollReveal";
 import Link from "next/link";
 import { useCms } from "@/lib/useCms";
@@ -26,6 +28,66 @@ export default function AboutContent() {
   const leadershipList = useCms<LeadershipProfile[]>("/api/cms/leadership", []);
   const careersList = useCms<JobListing[]>("/api/cms/careers", []);
   const newsletterContent = useCms<NewsletterContent | null>("/api/cms/newsletter", null);
+
+  const [newsletterEmail, setNewsletterEmail] = useState("");
+  const [newsletterSending, setNewsletterSending] = useState(false);
+  const [contactName, setContactName] = useState("");
+  const [contactEmail, setContactEmail] = useState("");
+  const [contactMessage, setContactMessage] = useState("");
+  const [contactSending, setContactSending] = useState(false);
+
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setNewsletterSending(true);
+    try {
+      const res = await fetch("/api/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ formId: "newsletter", email: newsletterEmail }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        toast.error(data.error ?? "Failed to subscribe. Please try again.");
+        return;
+      }
+      toast.success("Thanks for subscribing! We'll keep you updated.");
+      setNewsletterEmail("");
+    } catch {
+      toast.error("Something went wrong. Please try again.");
+    } finally {
+      setNewsletterSending(false);
+    }
+  };
+
+  const handleContactSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setContactSending(true);
+    try {
+      const res = await fetch("/api/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          formId: "contact",
+          name: contactName,
+          email: contactEmail,
+          message: contactMessage,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        toast.error(data.error ?? "Failed to send. Please try again.");
+        return;
+      }
+      toast.success("Message sent. We'll get back to you soon.");
+      setContactName("");
+      setContactEmail("");
+      setContactMessage("");
+    } catch {
+      toast.error("Something went wrong. Please try again.");
+    } finally {
+      setContactSending(false);
+    }
+  };
 
   const leadership = leadershipList.length > 0 ? leadershipList : defaultLeadership;
   const careers = careersList.length > 0 ? careersList.filter((j) => j.active !== false) : defaultCareers;
@@ -117,17 +179,21 @@ export default function AboutContent() {
             <p className="text-sm text-accent-foreground/70 font-medium mb-8">
               {newsletter?.subheading ?? "Get the latest news, offers, and insights from Supermarketing."}
             </p>
-            <form className="flex flex-col sm:flex-row gap-3 justify-center" onSubmit={(e) => e.preventDefault()}>
+            <form className="flex flex-col sm:flex-row gap-3 justify-center" onSubmit={handleNewsletterSubmit}>
               <input
                 type="email"
                 placeholder="Your email"
+                value={newsletterEmail}
+                onChange={(e) => setNewsletterEmail(e.target.value)}
                 className="flex-1 min-w-0 px-4 py-3 border border-accent-foreground/20 bg-white/10 text-accent-foreground placeholder:text-accent-foreground/50 rounded-sm text-sm"
+                required
               />
               <button
                 type="submit"
-                className="bg-secondary text-secondary-foreground px-8 py-3 brand-font text-sm font-bold uppercase tracking-widest rounded-sm hover:opacity-90 transition-opacity"
+                disabled={newsletterSending}
+                className="bg-secondary text-secondary-foreground px-8 py-3 brand-font text-sm font-bold uppercase tracking-widest rounded-sm hover:opacity-90 transition-opacity disabled:opacity-50"
               >
-                {newsletter?.buttonText ?? "Subscribe"}
+                {newsletterSending ? "Subscribing…" : (newsletter?.buttonText ?? "Subscribe")}
               </button>
             </form>
           </ScrollReveal>
@@ -185,24 +251,43 @@ export default function AboutContent() {
             <p className="text-sm text-foreground/60 font-medium mb-8">
               Have a question or want to work with us? Send us a message.
             </p>
-            <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+            <form className="space-y-6" onSubmit={handleContactSubmit}>
               <div>
                 <label className="block text-xs font-bold uppercase tracking-widest text-foreground/70 mb-2">Name</label>
-                <input type="text" className="w-full px-4 py-3 border border-foreground/10 bg-background rounded-sm" required />
+                <input
+                  type="text"
+                  value={contactName}
+                  onChange={(e) => setContactName(e.target.value)}
+                  className="w-full px-4 py-3 border border-foreground/10 bg-background rounded-sm"
+                  required
+                />
               </div>
               <div>
                 <label className="block text-xs font-bold uppercase tracking-widest text-foreground/70 mb-2">Email</label>
-                <input type="email" className="w-full px-4 py-3 border border-foreground/10 bg-background rounded-sm" required />
+                <input
+                  type="email"
+                  value={contactEmail}
+                  onChange={(e) => setContactEmail(e.target.value)}
+                  className="w-full px-4 py-3 border border-foreground/10 bg-background rounded-sm"
+                  required
+                />
               </div>
               <div>
                 <label className="block text-xs font-bold uppercase tracking-widest text-foreground/70 mb-2">Message</label>
-                <textarea rows={4} className="w-full px-4 py-3 border border-foreground/10 bg-background rounded-sm" required />
+                <textarea
+                  rows={4}
+                  value={contactMessage}
+                  onChange={(e) => setContactMessage(e.target.value)}
+                  className="w-full px-4 py-3 border border-foreground/10 bg-background rounded-sm"
+                  required
+                />
               </div>
               <button
                 type="submit"
-                className="w-full bg-secondary text-secondary-foreground py-4 brand-font text-sm font-bold uppercase tracking-widest rounded-sm hover:opacity-90 transition-opacity"
+                disabled={contactSending}
+                className="w-full bg-secondary text-secondary-foreground py-4 brand-font text-sm font-bold uppercase tracking-widest rounded-sm hover:opacity-90 transition-opacity disabled:opacity-50"
               >
-                Send message
+                {contactSending ? "Sending…" : "Send message"}
               </button>
             </form>
           </ScrollReveal>
