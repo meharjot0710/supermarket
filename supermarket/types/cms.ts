@@ -45,6 +45,8 @@ export interface NewsletterContent {
   subheading: string;
   buttonText: string;
   successMessage: string;
+  pdfFileName?: string;
+  hasPdf?: boolean;
 }
 
 export interface FormContent {

@@ -54,8 +54,8 @@ export async function GET() {
       await db.collection("newsletter").insertOne({
         heading: "Stay updated",
         subheading: "Get the latest offers and news.",
-        buttonText: "Subscribe",
-        successMessage: "Thanks for subscribing!",
+        buttonText: "View newsletter",
+        successMessage: "",
       } as OptionalId<Document>);
     }
 

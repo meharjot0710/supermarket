@@ -29,35 +29,10 @@ export default function AboutContent() {
   const careersList = useCms<JobListing[]>("/api/cms/careers", []);
   const newsletterContent = useCms<NewsletterContent | null>("/api/cms/newsletter", null);
 
-  const [newsletterEmail, setNewsletterEmail] = useState("");
-  const [newsletterSending, setNewsletterSending] = useState(false);
   const [contactName, setContactName] = useState("");
   const [contactEmail, setContactEmail] = useState("");
   const [contactMessage, setContactMessage] = useState("");
   const [contactSending, setContactSending] = useState(false);
-
-  const handleNewsletterSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setNewsletterSending(true);
-    try {
-      const res = await fetch("/api/submit", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ formId: "newsletter", email: newsletterEmail }),
-      });
-      const data = await res.json();
-      if (!res.ok) {
-        toast.error(data.error ?? "Failed to subscribe. Please try again.");
-        return;
-      }
-      toast.success("Thanks for subscribing! We'll keep you updated.");
-      setNewsletterEmail("");
-    } catch {
-      toast.error("Something went wrong. Please try again.");
-    } finally {
-      setNewsletterSending(false);
-    }
-  };
 
   const handleContactSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -179,23 +154,21 @@ export default function AboutContent() {
             <p className="text-sm text-accent-foreground/70 font-medium mb-8">
               {newsletter?.subheading ?? "Get the latest news, offers, and insights from Supermarketing."}
             </p>
-            <form className="flex flex-col sm:flex-row gap-3 justify-center" onSubmit={handleNewsletterSubmit}>
-              <input
-                type="email"
-                placeholder="Your email"
-                value={newsletterEmail}
-                onChange={(e) => setNewsletterEmail(e.target.value)}
-                className="flex-1 min-w-0 px-4 py-3 border border-accent-foreground/20 bg-white/10 text-accent-foreground placeholder:text-accent-foreground/50 rounded-sm text-sm"
-                required
-              />
-              <button
-                type="submit"
-                disabled={newsletterSending}
-                className="bg-secondary text-secondary-foreground px-8 py-3 brand-font text-sm font-bold uppercase tracking-widest rounded-sm hover:opacity-90 transition-opacity disabled:opacity-50"
+            {newsletter?.hasPdf ? (
+              <a
+                href="/api/newsletter-pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center bg-secondary text-secondary-foreground px-8 py-3 brand-font text-sm font-bold uppercase tracking-widest rounded-sm hover:opacity-90 transition-opacity"
               >
-                {newsletterSending ? "Subscribing…" : (newsletter?.buttonText ?? "Subscribe")}
-              </button>
-            </form>
+                {newsletter.buttonText ?? "View newsletter"}
+              </a>
+            ) : (
+              <p className="text-sm text-accent-foreground/60 font-medium">
+                The latest newsletter PDF will be available here once it has been uploaded in
+                the admin panel.
+              </p>
+            )}
           </ScrollReveal>
         </div>
       </section>

@@ -53,6 +53,10 @@ export interface NewsletterContent {
   subheading: string;
   buttonText: string;
   successMessage: string;
+  /** Original filename for the uploaded PDF (stored alongside pdfBinary in MongoDB). */
+  pdfFileName?: string;
+  /** Present on GET responses; omit when saving. */
+  hasPdf?: boolean;
 }
 
 export interface FormContent {

@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #111111;
+  --mac-hero-blue: #9bd2e1;
+  --mac-teal: #3799ad;
+  --mac-muted: #666666;
+  --mac-header-gray: #f5f5f5;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-inter);
+  --font-heading: var(--font-barlow-condensed);
+}
+
+html {
+  height: auto;
+  min-height: 100%;
+}
+
+body {
+  min-height: 100%;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter), system-ui, sans-serif;
+}
+
+/* Stable utilities so long-form pages never lose body text colour to purging/TW edge cases */
+.text-mac-muted {
+  color: var(--mac-muted);
+}
+
+.text-mac-teal {
+  color: var(--mac-teal);
+}
+
+.font-heading {
+  font-family: var(--font-barlow-condensed), system-ui, sans-serif;
+}
+
+.mac-scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.mac-scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+@keyframes hero-deck-scroll {
+  from {
+    transform: translate3d(0, 0, 0) rotateY(-11deg) rotateX(5deg);
+  }
+  to {
+    transform: translate3d(0, -50%, 0) rotateY(-11deg) rotateX(5deg);
+  }
+}
+
+.hero-deck-scroll-track {
+  animation: hero-deck-scroll 20s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-deck-scroll-track {
+    animation: none;
+    transform: rotateY(-11deg) rotateX(5deg);
+  }
+}
