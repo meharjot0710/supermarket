@@ -1,9 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
+import { FeaturedProductsMarquee } from "./featured-products-marquee";
 import { HeroBrandCardsAutoScroll } from "./hero-brand-cards-auto-scroll";
 import { MacLogo } from "./mac-logo";
+import { NewsletterCatalogueStrip } from "./newsletter-catalogue-strip";
+import { ServiceImageCarousel } from "./service-image-carousel";
 import { SiteHeaderBar } from "./site-header-bar";
+import { TrustedBrandLogoMarquee } from "./trusted-brand-logo-marquee";
 import { siteContent } from "../site-content";
+import type { ResolvedHeroContent } from "@/lib/hero-cms";
 
 function CarouselRow({ children }: { children: React.ReactNode }) {
   return (
@@ -13,12 +18,15 @@ function CarouselRow({ children }: { children: React.ReactNode }) {
   );
 }
 
-export default function MacMerchandisingLanding() {
-  const { hero, services, trustedBrands, trustedRetailers } = siteContent;
-  const trustedCarouselNames = [
-    ...trustedBrands.names,
-    ...trustedRetailers.names,
-  ];
+type MacMerchandisingLandingProps = {
+  heroContent?: ResolvedHeroContent;
+};
+
+export default function MacMerchandisingLanding({
+  heroContent,
+}: MacMerchandisingLandingProps) {
+  const { services, trustedBrands } = siteContent;
+  const hero = heroContent ?? siteContent.hero;
 
   return (
     <div className="flex flex-col">
@@ -33,9 +41,6 @@ export default function MacMerchandisingLanding() {
               <span className="inline-block size-1.5 rounded-full bg-white" />
               {hero.badge}
             </div>
-            <h1 className="font-heading mb-10 max-w-xl text-4xl font-bold uppercase leading-[1.05] tracking-tight sm:text-5xl lg:text-[3.15rem] xl:text-[3.4rem]">
-              {hero.headline}
-            </h1>
             <p className="mb-10 max-w-xl text-base leading-relaxed text-white/90 sm:text-lg">
               {hero.subtitle}
             </p>
@@ -101,12 +106,9 @@ export default function MacMerchandisingLanding() {
             {services.columns.map((col) => (
               <article key={col.title}>
                 <div className="relative mb-6 aspect-[4/3] overflow-hidden rounded-2xl bg-neutral-100 shadow-sm ring-1 ring-black/5">
-                  <Image
-                    src={col.image}
+                  <ServiceImageCarousel
+                    images={col.images}
                     alt={col.imageAlt}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, 33vw"
                   />
                 </div>
                 <h3 className="mb-3 text-lg font-bold text-black">{col.title}</h3>
@@ -133,46 +135,17 @@ export default function MacMerchandisingLanding() {
           <h2 className="font-heading mb-8 text-center text-2xl font-bold uppercase tracking-tight text-black sm:text-3xl">
             {trustedBrands.title}
           </h2>
-          <CarouselRow>
-            {trustedCarouselNames.map((name) => (
-              <div
-                key={name}
-                className="min-w-[160px] snap-center rounded-xl border border-neutral-200 bg-white px-6 py-4 text-center text-sm font-semibold uppercase tracking-wide text-neutral-700 shadow-sm"
-              >
-                {name}
-              </div>
-            ))}
-          </CarouselRow>
+          <TrustedBrandLogoMarquee brands={trustedBrands.names} />
         </div>
       </section>
 
-      {/* <SiteHeaderBar /> */}
-
-      {/* What makes us different */}
-      <section className="bg-white py-16 sm:py-24">
+      {/* Featured range */}
+      <section className="border-t border-neutral-200 bg-neutral-50 py-14">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
-          <h2 className="font-heading mb-6 text-center text-4xl font-bold uppercase leading-tight tracking-tight text-black sm:text-5xl">
-            {siteContent.differentiators.title}
-            <br />
-            {siteContent.differentiators.titleAccent}
+          <h2 className="font-heading mb-8 text-center text-3xl font-bold uppercase tracking-tight text-black sm:text-4xl">
+            {siteContent.featuredProducts.title}
           </h2>
-          <p className="mx-auto mb-14 max-w-3xl text-center text-base leading-relaxed text-[var(--mac-muted)] sm:text-lg">
-            {siteContent.differentiators.intro}
-          </p>
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {siteContent.differentiators.cards.map((item) => (
-              <article
-                key={item.title}
-                className="flex flex-col rounded-2xl border border-neutral-200 bg-neutral-50/60 p-6 shadow-sm"
-              >
-                <div className="mb-4 aspect-video w-full rounded-xl bg-neutral-200" />
-                <h3 className="mb-2 text-lg font-bold text-black">{item.title}</h3>
-                <p className="text-sm leading-relaxed text-[var(--mac-muted)]">
-                  {item.body}
-                </p>
-              </article>
-            ))}
-          </div>
+          <FeaturedProductsMarquee items={siteContent.featuredProducts.items} />
         </div>
       </section>
 
@@ -222,6 +195,36 @@ export default function MacMerchandisingLanding() {
 
       {/* <SiteHeaderBar /> */}
 
+      {/* What makes us different */}
+      <section className="bg-white py-16 sm:py-24">
+        <div className="mx-auto max-w-7xl px-5 sm:px-8">
+          <h2 className="font-heading mb-6 text-center text-4xl font-bold uppercase leading-tight tracking-tight text-black sm:text-5xl">
+            {siteContent.differentiators.title}
+            <br />
+            {siteContent.differentiators.titleAccent}
+          </h2>
+          <p className="mx-auto mb-14 max-w-3xl text-center text-base leading-relaxed text-[var(--mac-muted)] sm:text-lg">
+            {siteContent.differentiators.intro}
+          </p>
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            {siteContent.differentiators.cards.map((item) => (
+              <article
+                key={item.title}
+                className="flex flex-col rounded-2xl border border-neutral-200 bg-neutral-50/60 p-6 shadow-sm"
+              >
+                <div className="mb-4 aspect-video w-full rounded-xl bg-neutral-200" />
+                <h3 className="mb-2 text-lg font-bold text-black">{item.title}</h3>
+                <p className="text-sm leading-relaxed text-[var(--mac-muted)]">
+                  {item.body}
+                </p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* <SiteHeaderBar /> */}
+
       {/* Team */}
       <section className="bg-white py-16 sm:py-24">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
@@ -231,59 +234,38 @@ export default function MacMerchandisingLanding() {
           <p className="font-heading mb-12 text-center text-4xl font-bold uppercase tracking-tight text-[var(--mac-teal)] sm:text-5xl">
             {siteContent.team.titleAccent}
           </p>
-          <div className="mx-auto grid max-w-5xl gap-10 lg:grid-cols-[320px_1fr] lg:items-start">
-            <div className="relative mx-auto aspect-[4/5] w-full max-w-xs overflow-hidden rounded-2xl bg-neutral-200 shadow-lg ring-1 ring-black/5 lg:mx-0">
-              <Image
-                src={siteContent.team.image}
-                alt={siteContent.team.imageAlt}
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 280px, 320px"
-              />
-            </div>
-            <div className="text-[var(--mac-muted)]">
-              <p className="mb-2 text-lg font-semibold text-black">
-                {siteContent.team.leadName}
-              </p>
-              {siteContent.team.bio.map((p, i) => (
-                <p key={i} className="mb-6 text-sm leading-relaxed last:mb-0">
-                  {p}
+          <p className="mx-auto mb-10 max-w-3xl text-center text-sm leading-relaxed text-[var(--mac-muted)] sm:text-base">
+            Meet the team behind SuperMarketing's commitment to quality and service.
+          </p>
+          <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-3">
+            {siteContent.about.leadership.map((person) => (
+              <article
+                key={`${person.name}-${person.title}`}
+                className="flex flex-col rounded-2xl border border-neutral-200 bg-neutral-50/70 p-6 shadow-sm"
+              >
+                <div className="relative mb-5 aspect-[4/5] w-full overflow-hidden rounded-xl bg-neutral-200">
+                  <Image
+                    src={person.image}
+                    alt={person.name}
+                    fill
+                    className="object-cover object-top"
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                  />
+                </div>
+                <p className="text-lg font-bold text-black">{person.name}</p>
+                <p className="mb-3 text-[11px] font-bold uppercase tracking-widest text-[var(--mac-teal)]">
+                  {person.title}
                 </p>
-              ))}
-              <p className="mt-6 text-sm">
-                <Link
-                  href={siteContent.team.aboutHref}
-                  className="font-semibold text-[var(--mac-teal)] hover:underline"
-                >
-                  About us →
-                </Link>
-              </p>
-            </div>
+                <p className="text-sm leading-relaxed text-[var(--mac-muted)]">
+                  {person.shortMessage}
+                </p>
+              </article>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Featured range */}
-      <section className="border-t border-neutral-200 bg-neutral-50 py-14">
-        <div className="mx-auto max-w-7xl px-5 sm:px-8">
-          <h2 className="font-heading mb-8 text-center text-3xl font-bold uppercase tracking-tight text-black sm:text-4xl">
-            {siteContent.featuredProducts.title}
-          </h2>
-          <CarouselRow>
-            {siteContent.featuredProducts.items.map((item) => (
-              <div
-                key={item.name}
-                className="flex min-w-[200px] snap-center flex-col overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-md"
-              >
-                <div className="aspect-[5/3] bg-gradient-to-br from-neutral-100 to-neutral-200" />
-                <div className="p-4 text-center text-sm font-semibold text-neutral-800">
-                  {item.name}
-                </div>
-              </div>
-            ))}
-          </CarouselRow>
-        </div>
-      </section>
+      <NewsletterCatalogueStrip items={siteContent.newsletterCatalogue.items} />
 
       {/* Why partner */}
       <section className="bg-white py-16 sm:py-24">
@@ -317,17 +299,13 @@ export default function MacMerchandisingLanding() {
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <div className="mx-auto max-w-3xl text-center">
             <h2 className="font-heading text-4xl font-bold uppercase leading-tight tracking-tight text-black sm:text-5xl">
-              {siteContent.cta.headline1}{" "}
-              <span className="text-[var(--mac-teal)]">
-                {siteContent.cta.headline1Highlight}
-              </span>{" "}
-              {siteContent.cta.headline1Rest}
+              {siteContent.cta.headline1}
             </h2>
             <h2 className="font-heading mt-2 text-4xl font-bold uppercase leading-tight tracking-tight text-black sm:text-5xl">
-              {siteContent.cta.headline2Before}{" "}
-              <span className="text-[var(--mac-teal)]">
-                {siteContent.cta.headline2Highlight}
-              </span>
+              {siteContent.cta.headline2}
+            </h2>
+            <h2 className="font-heading mt-2 text-4xl font-bold uppercase leading-tight tracking-tight text-[var(--mac-teal)] sm:text-5xl">
+              {siteContent.cta.headline3}
             </h2>
             <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-[var(--mac-muted)]">
               {siteContent.cta.blurb}
@@ -364,9 +342,6 @@ export default function MacMerchandisingLanding() {
             <div className="flex gap-6 text-sm font-medium">
               <Link className="text-[var(--mac-teal)] hover:underline" href="/contact">
                 Contact
-              </Link>
-              <Link className="text-[var(--mac-teal)] hover:underline" href="/about">
-                About
               </Link>
             </div>
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-neutral-500">

@@ -3,7 +3,8 @@
 :root {
   --background: #ffffff;
   --foreground: #111111;
-  --mac-hero-blue: #9bd2e1;
+  --brand-blue: #badcf3;
+  --mac-hero-blue: var(--brand-blue);
   --mac-teal: #3799ad;
   --mac-muted: #666666;
   --mac-header-gray: #f5f5f5;
@@ -26,6 +27,8 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.6;
 }
 
 /* Stable utilities so long-form pages never lose body text colour to purging/TW edge cases */
@@ -49,22 +52,39 @@ body {
   display: none;
 }
 
-@keyframes hero-deck-scroll {
+@keyframes trusted-brand-marquee {
   from {
-    transform: translate3d(0, 0, 0) rotateY(-11deg) rotateX(5deg);
+    transform: translateX(0);
   }
   to {
-    transform: translate3d(0, -50%, 0) rotateY(-11deg) rotateX(5deg);
+    transform: translateX(calc(-50% - 0.5rem));
   }
 }
 
-.hero-deck-scroll-track {
-  animation: hero-deck-scroll 20s linear infinite;
+.trusted-brand-marquee {
+  animation: trusted-brand-marquee 24s linear infinite;
+}
+
+@keyframes featured-products-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-50% - 0.5rem));
+  }
+}
+
+.featured-products-marquee {
+  animation: featured-products-marquee 28s linear infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-deck-scroll-track {
+  .trusted-brand-marquee {
     animation: none;
-    transform: rotateY(-11deg) rotateX(5deg);
+  }
+
+  .featured-products-marquee {
+    animation: none;
   }
 }
+

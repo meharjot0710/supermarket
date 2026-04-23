@@ -15,7 +15,7 @@ export const siteContent = {
   },
 
   intro:
-    "SuperMarketing has been a trusted name in FMCG wholesale and distribution for more than 25 years. We connect brands and independent retailers across Australia with reliable supply, competitive pricing, and hands-on support — from shelf placement and relay services to direct retailer collaboration. Our point of difference is clear communication, dependable supply, and dedicated service across the supermarket industry.",
+    "Supermarketing has been a trusted name in FMCG wholesale and distribution for more than 26 years. We connect brands and independent retailers across Australia with reliable supply, competitive pricing, and hands-on support — from shelf placement, relay services to best in class key account management and direct retailer collaboration. Our point of difference is clear communication, dependable supply and dedicated service across the supermarket industry.",  
 
   services: {
     eyebrow: "What we offer",
@@ -24,12 +24,17 @@ export const siteContent = {
       {
         image:
           "https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&w=900&q=80",
+        images: [
+          "https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&w=900&q=80",
+          "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=900&q=80",
+          "https://images.unsplash.com/photo-1565891741441-64926e441838?auto=format&fit=crop&w=900&q=80",
+        ],
         imageAlt: "Warehouse and wholesale distribution",
         title: "Wholesale range & distribution",
-        lead: "Access the world's best brands through one wholesale partner.",
+        lead: "Access to key brands through one wholesale partner.",
         bullets: [
-          "Core range including G-Fresh, Rosella, Buderim, Scrub Daddy, and many more",
-          "4,000+ quality products from 250+ Australian and international brands",
+          "Core range including G-Fresh, Bow Wow, Rosella, Buderim, Huggie, Capi, CoCoCoast and many more",
+          "1,000+ quality products from over 50+ Australian and international brands and suppliers",
           "Consistent supply and strong brand performance at retail level",
         ],
         footer:
@@ -38,20 +43,31 @@ export const siteContent = {
       {
         image:
           "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=900&q=80",
+        images: [
+          "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=900&q=80",
+          "https://images.unsplash.com/photo-1601599561213-832382fd07ba?auto=format&fit=crop&w=900&q=80",
+          "https://images.unsplash.com/photo-1488459716781-31db52582fe9?auto=format&fit=crop&w=900&q=80",
+        ],
         imageAlt: "Grocery retail aisle",
         title: "Field sales & in-store execution",
         lead: "Choose from a wide range of solutions designed to maximise profitability.",
         bullets: [
-          "Upselling and optimised product placement",
-          "In-store display setup and retail-level customer support",
+          "Upselling and optimised product placement via our dedicated and experienced field sales team",
+          "In-store display setup, and retail-level customer support",
           "Direct retailer collaboration and renowned relay service",
+          "Promotional/Pricing and ranging compliance",
         ],
         footer:
-          "Our experienced field team handles the heavy lifting so you can focus on running your store.",
+          "Our experienced field team handles the heavy lifting so you can focus on running your store or developing your brands.",
       },
       {
         image:
           "https://images.unsplash.com/photo-1588964895597-cfccd6bf2b91?auto=format&fit=crop&w=900&q=80",
+        images: [
+          "https://images.unsplash.com/photo-1588964895597-cfccd6bf2b91?auto=format&fit=crop&w=900&q=80",
+          "https://images.unsplash.com/photo-1578916171728-46686eac8d58?auto=format&fit=crop&w=900&q=80",
+          "https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&w=900&q=80",
+        ],
         imageAlt: "Retail shelf execution",
         title: "Partnership & service",
         lead: "Reliable supply, dedicated service, and clear communication.",
@@ -132,7 +148,7 @@ export const siteContent = {
     ],
     stats: [
       { v: "25+", l: "Years experience" },
-      { v: "4,000+", l: "Products" },
+      { v: "1,000+", l: "Products" },
       { v: "250+", l: "Brands" },
     ],
     statsEyebrow: "Trusted nationwide",
@@ -152,7 +168,6 @@ export const siteContent = {
       "Mina (Director) drives excellence in supply chain, operations, and reliability. Justin (General Manager) ensures day-to-day delivery, client success, and the hands-on support our partners rely on.",
       "For the full leadership story and careers, visit our About page.",
     ],
-    aboutHref: "/about",
   },
 
   featuredProducts: {
@@ -166,6 +181,32 @@ export const siteContent = {
       { name: "Buderim Ginger Beer", hint: "Beverages" },
       { name: "G-Fresh", hint: "Pantry" },
       { name: "Bow Wow", hint: "Pet care" },
+    ],
+  },
+
+  newsletterCatalogue: {
+    items: [
+      {
+        title: "Team News",
+        issue: "July 2025",
+        coverImage:
+          "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=900&q=80",
+        pdfUrl: "/api/newsletter-pdf",
+      },
+      {
+        title: "Team News",
+        issue: "June 2025",
+        coverImage:
+          "https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=900&q=80",
+        pdfUrl: "/api/newsletter-pdf",
+      },
+      {
+        title: "Team News",
+        issue: "May 2025",
+        coverImage:
+          "https://images.unsplash.com/photo-1529429617124-aee711f7f3c3?auto=format&fit=crop&w=900&q=80",
+        pdfUrl: "/api/newsletter-pdf",
+      },
     ],
   },
 
@@ -197,11 +238,9 @@ export const siteContent = {
   },
 
   cta: {
-    headline1: "Have a",
-    headline1Highlight: "wholesale",
-    headline1Rest: "enquiry?",
-    headline2Before: "Let's",
-    headline2Highlight: "talk",
+    headline1: "Have a Sales and Distribution enquiry?",
+    headline2: "Have a Brand Agent enquiry?",
+    headline3: "Let's Talk",
     blurb:
       "Get in touch for wholesale enquiries, partnerships, or general questions. We do not sell directly to the public — trade customers only.",
     contacts: [
@@ -250,8 +289,7 @@ export const siteContent = {
         title: "Director",
         shortMessage:
           "Leading our vision for growth and long-term partnership with brands and retailers across Australia.",
-        image:
-          "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=400&auto=format&fit=crop",
+        image: "/Team/Harry%20Vetos.png",
       },
       {
         name: "Mina",
@@ -266,8 +304,7 @@ export const siteContent = {
         title: "General Manager",
         shortMessage:
           "Ensuring day-to-day delivery, client success, and the hands-on support our partners rely on.",
-        image:
-          "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=400&auto=format&fit=crop",
+        image: "/Team/Justin%20loos.JPG",
       },
     ],
 

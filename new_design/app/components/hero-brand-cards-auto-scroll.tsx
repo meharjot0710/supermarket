@@ -1,14 +1,20 @@
 "use client";
 
 import Image from "next/image";
+import { useEffect, useRef } from "react";
 
 const BRAND_LOGO_FILES = [
+  // Requested lead sequence
+  "GFresh Logo.jpg",
+  "Bow Wow Logo.png",
+  "CAPI_LOGO_RED.png",
+  "Rosella Logo.png",
+  "CAPI_LOGO_RED.png",
+  "Buderim Logo.png",
   "2025_CocoCoast_Logo_RGB_Natural.png",
+  // Then the rest
   "Astonish Logo.PNG",
   "Baby Mum-Mum.png",
-  "Bow Wow Logo.png",
-  "Buderim Logo.png",
-  "CAPI_LOGO_RED.png",
   "Care Organic.JPG",
   "CLR.png",
   "cropped-NEW-Blue-Banner-Logo-2.png",
@@ -16,7 +22,6 @@ const BRAND_LOGO_FILES = [
   "Devondale Logo.png",
   "download (2).png",
   "Dr.Beckmann-o7ik6ev0lgs9o8yn912l1t3y4y8dqpn4pinh50enjg.png",
-  "GFresh Logo.jpg",
   "Hercules Logo.PNG",
   "Homeforce Logo.PNG",
   "Hygiene Plus Logo.PNG",
@@ -35,7 +40,6 @@ const BRAND_LOGO_FILES = [
   "O_Cedar.jpg",
   "Orama Logo.PNG",
   "PLATINUM LOGO.png",
-  "Rosella Logo.png",
   "Sunraysia+Logo-01.png",
   "th.jpg",
   "the pink stuff.PNG",
@@ -53,9 +57,9 @@ function brandId(filename: string) {
 function BrandCard({ filename }: { filename: string }) {
   return (
     <div
-      className="flex min-h-[5.75rem] w-full shrink-0 items-center justify-center rounded-3xl border border-white/10 bg-white/95 px-5 py-7 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.18)] ring-black/5 sm:min-h-[6.5rem] sm:rounded-[1.35rem]"
+      className="flex h-[5.75rem] w-full shrink-0 items-center justify-center rounded-3xl border border-white/10 bg-white/95 px-5 py-7 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.18)] ring-black/5 sm:h-[6.5rem] sm:rounded-[1.35rem]"
     >
-      <div className="relative h-14 w-full sm:h-16">
+      <div className="relative h-16 w-full sm:h-20">
         <Image
           src={brandSrc(filename)}
           alt=""
@@ -69,31 +73,79 @@ function BrandCard({ filename }: { filename: string }) {
 }
 
 export function HeroBrandCardsAutoScroll() {
-  const items = [...BRAND_LOGO_FILES];
-  const loop = [...items, ...items];
+  const trackRef = useRef<HTMLDivElement | null>(null);
+  const sequenceRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const track = trackRef.current;
+    const sequence = sequenceRef.current;
+    if (!track || !sequence) return;
+
+    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (media.matches) {
+      track.style.transform = "translate3d(0, 0, 0)";
+      return;
+    }
+
+    const speedPxPerSecond = 90;
+    let sequenceHeight = 1;
+    let offset = 0;
+    let rafId = 0;
+    let lastTs = performance.now();
+
+    const measure = () => {
+      sequenceHeight = Math.max(sequence.offsetHeight, 1);
+    };
+
+    const tick = (ts: number) => {
+      const deltaSeconds = (ts - lastTs) / 1000;
+      lastTs = ts;
+      offset += speedPxPerSecond * deltaSeconds;
+
+      if (offset >= sequenceHeight) {
+        offset -= sequenceHeight;
+      }
+
+      track.style.transform = `translate3d(0, -${offset}px, 0)`;
+      rafId = requestAnimationFrame(tick);
+    };
+
+    measure();
+    const onResize = () => measure();
+    window.addEventListener("resize", onResize);
+    rafId = requestAnimationFrame(tick);
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      window.removeEventListener("resize", onResize);
+    };
+  }, []);
 
   return (
     <div
-      className="mx-auto w-full max-w-[min(100%,20rem)] [perspective:1100px] lg:mx-0 lg:max-w-[18.5rem]"
+      className="mx-auto w-full max-w-[min(100%,20rem)] lg:mx-0 lg:max-w-[18.5rem]"
       aria-hidden
     >
-      <div className="relative h-[min(32rem,72vh)] overflow-hidden sm:h-[min(36rem,75vh)]">
+      <div className="relative h-[min(32rem,72vh)] overflow-x-visible overflow-y-hidden px-2 sm:h-[min(36rem,75vh)] sm:px-3">
         <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-16 bg-gradient-to-b from-[var(--mac-hero-blue)] to-transparent" />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-16 bg-gradient-to-t from-[var(--mac-hero-blue)] to-transparent" />
 
         <div className="flex h-full items-stretch justify-center pt-2 pb-4">
           <div
-            className="hero-deck-scroll-track flex w-full flex-col gap-4 [transform-style:preserve-3d] will-change-transform"
-            style={{
-              transformOrigin: "50% 50%",
-            }}
+            ref={trackRef}
+            className="flex w-full flex-col gap-4 will-change-transform"
+            style={{ transformOrigin: "50% 50%" }}
           >
-            {loop.map((filename, i) => (
-              <BrandCard
-                key={`${brandId(filename)}-${i}`}
-                filename={filename}
-              />
-            ))}
+            <div ref={sequenceRef} className="flex w-full flex-col gap-4">
+              {BRAND_LOGO_FILES.map((filename, i) => (
+                <BrandCard key={`${brandId(filename)}-a-${i}`} filename={filename} />
+              ))}
+            </div>
+            <div className="flex w-full flex-col gap-4" aria-hidden>
+              {BRAND_LOGO_FILES.map((filename, i) => (
+                <BrandCard key={`${brandId(filename)}-b-${i}`} filename={filename} />
+              ))}
+            </div>
           </div>
         </div>
       </div>
