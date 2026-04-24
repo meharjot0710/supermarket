@@ -143,7 +143,7 @@ export function HeroBrandCardsAutoScroll({
 
   const viewportHeightClass =
     variant === "hero"
-      ? "h-[min(19rem,42vh)] sm:h-[min(21rem,46vh)]"
+      ? "h-[min(20rem,44vh)] sm:h-[min(24rem,50vh)] lg:h-[min(28rem,56vh)]"
       : "h-[min(32rem,72vh)] sm:h-[min(36rem,75vh)]";
 
   return (
