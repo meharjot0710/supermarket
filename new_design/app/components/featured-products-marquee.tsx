@@ -1,10 +1,12 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef } from "react";
 
 type FeaturedItem = {
   name: string;
   hint: string;
+  image?: string;
 };
 
 export function FeaturedProductsMarquee({ items }: { items: readonly FeaturedItem[] }) {
@@ -63,7 +65,17 @@ export function FeaturedProductsMarquee({ items }: { items: readonly FeaturedIte
             key={`${item.name}-${i}`}
             className="flex min-w-[220px] shrink-0 snap-center flex-col overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-md"
           >
-            <div className="aspect-[5/3] bg-gradient-to-br from-neutral-100 to-neutral-200" />
+            <div className="relative aspect-[5/3] bg-gradient-to-br from-neutral-100 to-neutral-200">
+              {item.image ? (
+                <Image
+                  src={item.image}
+                  alt={item.name}
+                  fill
+                  className="object-cover"
+                  sizes="220px"
+                />
+              ) : null}
+            </div>
             <div className="p-4 text-center">
               <p className="text-sm font-semibold text-neutral-800">{item.name}</p>
               <p className="mt-1 text-xs uppercase tracking-wide text-neutral-500">{item.hint}</p>

@@ -227,7 +227,17 @@ export default function MacMerchandisingLanding({
                 key={item.title}
                 className="flex flex-col rounded-2xl border border-neutral-200 bg-neutral-50/60 p-6 shadow-sm"
               >
-                <div className="mb-4 aspect-video w-full rounded-xl bg-neutral-200" />
+                <div className="relative mb-4 aspect-video w-full overflow-hidden rounded-xl bg-neutral-200">
+                  {"image" in item ? (
+                    <Image
+                      src={item.image}
+                      alt={item.title}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                    />
+                  ) : null}
+                </div>
                 <h3 className="mb-2 text-lg font-bold text-black">{item.title}</h3>
                 <p className="text-sm leading-relaxed text-[var(--mac-muted)]">
                   {item.body}

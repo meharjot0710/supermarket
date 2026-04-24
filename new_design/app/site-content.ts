@@ -26,12 +26,11 @@ export const siteContent = {
     title: "How we help you grow",
     columns: [
       {
-        image:
-          "https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&w=900&q=80",
+        image: "/Wholesale%20range%20%26%20distribution/2.jpg",
         images: [
-          "https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&w=900&q=80",
-          "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=900&q=80",
-          "https://images.unsplash.com/photo-1565891741441-64926e441838?auto=format&fit=crop&w=900&q=80",
+          "/Wholesale%20range%20%26%20distribution/2.jpg",
+          "/Wholesale%20range%20%26%20distribution/3.jpg",
+          "/Wholesale%20range%20%26%20distribution/4.jpg",
         ],
         imageAlt: "Warehouse and wholesale distribution",
         title: "Wholesale range & distribution",
@@ -45,12 +44,11 @@ export const siteContent = {
           "We work with leading FMCG brands to keep shelves stocked and retailers competitive.",
       },
       {
-        image:
-          "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=900&q=80",
+        image: "/Field%20sales%20%26%20in-store%20execution/WhatsApp%20Image%202026-04-20%20at%2010.35.27%20AM.jpeg",
         images: [
-          "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=900&q=80",
-          "https://images.unsplash.com/photo-1601599561213-832382fd07ba?auto=format&fit=crop&w=900&q=80",
-          "https://images.unsplash.com/photo-1488459716781-31db52582fe9?auto=format&fit=crop&w=900&q=80",
+          "/Field%20sales%20%26%20in-store%20execution/WhatsApp%20Image%202026-04-20%20at%2010.35.27%20AM.jpeg",
+          "/Field%20sales%20%26%20in-store%20execution/WhatsApp%20Image%202026-04-24%20at%201.48.38%20PM.jpeg",
+          "/Field%20sales%20%26%20in-store%20execution/WhatsApp%20Image%202026-04-24%20at%201.48.38%20PM%20(1).jpeg",
         ],
         imageAlt: "Grocery retail aisle",
         title: "Field sales & in-store execution",
@@ -65,12 +63,15 @@ export const siteContent = {
           "Our experienced field team handles the heavy lifting so you can focus on running your store or developing your brands.",
       },
       {
-        image:
-          "https://images.unsplash.com/photo-1588964895597-cfccd6bf2b91?auto=format&fit=crop&w=900&q=80",
+        image: "/Partnership%20%26%20service/1759362171896.jpg",
         images: [
-          "https://images.unsplash.com/photo-1588964895597-cfccd6bf2b91?auto=format&fit=crop&w=900&q=80",
-          "https://images.unsplash.com/photo-1578916171728-46686eac8d58?auto=format&fit=crop&w=900&q=80",
-          "https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&w=900&q=80",
+          "/Partnership%20%26%20service/1759362171896.jpg",
+          "/Partnership%20%26%20service/WhatsApp%20Image%202026-04-24%20at%201.48.30%20PM.jpeg",
+          "/Partnership%20%26%20service/WhatsApp%20Image%202026-04-24%20at%201.48.31%20PM.jpeg",
+          "/Partnership%20%26%20service/WhatsApp%20Image%202026-04-24%20at%201.48.32%20PM.jpeg",
+          "/Partnership%20%26%20service/WhatsApp%20Image%202026-04-24%20at%201.48.32%20PM%20(1).jpeg",
+          "/Partnership%20%26%20service/WhatsApp%20Image%202026-04-24%20at%201.48.32%20PM%20(2).jpeg",
+          "/Partnership%20%26%20service/WhatsApp%20Image%202026-04-24%20at%201.48.36%20PM.jpeg",
         ],
         imageAlt: "Retail shelf execution",
         title: "Partnership & service",
@@ -127,10 +128,13 @@ export const siteContent = {
       {
         title: "We know how to help you",
         body: "We understand the complexity of today's FMCG retail market. We help retailers maximise shelf space, improve margins, and access competitive wholesale deals.",
+        image: "/We%20know%20how%20to%20help%20you/9563e3d9-4e0c-4655-bbf9-71194bdf5b47.png",
       },
       {
         title: "Your one-stop FMCG solution",
         body: "Products, services, and competitive pricing under one roof — making sourcing simple, efficient, and scalable for independent supermarkets.",
+        image:
+          "/Your%20one-stop%20FMCG%20solution/6ec5b51d-e571-4237-b56d-5e56afa146ac.png",
       },
       {
         title: "National footprint",
@@ -139,6 +143,8 @@ export const siteContent = {
       {
         title: "Integrity & delivery",
         body: "For over two decades our values have stayed the same: integrity, communication, and delivery — ensuring satisfaction across the supermarket industry.",
+        image:
+          "/Integrity%20%26%20delivery/6ec5b51d-e571-4237-b56d-5e56afa146ac%20-%20Copy.png",
       },
     ],
   },
@@ -177,14 +183,36 @@ export const siteContent = {
   featuredProducts: {
     title: "Featured range",
     items: [
-      { name: "Rosella Tomato Sauce", hint: "Pantry" },
-      { name: "Capi Sparkling", hint: "Beverages" },
-      { name: "Scrub Daddy", hint: "Cleaning" },
-      { name: "Coco Coast Coconut Water", hint: "Beverages" },
-      { name: "The Pink Stuff", hint: "Household" },
-      { name: "Buderim Ginger Beer", hint: "Beverages" },
-      { name: "G-Fresh", hint: "Pantry" },
-      { name: "Bow Wow", hint: "Pet care" },
+      {
+        name: "Devondale Grape Sparkler",
+        hint: "Beverages",
+        image: "/Featured%20%26%20New%20range/Devondale%20Grape%20Sparkler.jpg",
+      },
+      {
+        name: "Rosella Pickled Red Onion",
+        hint: "Pantry",
+        image: "/Featured%20%26%20New%20range/Rosella%20Sliced%20Pickled%20Red%20Onion.jpg",
+      },
+      {
+        name: "Natural Vanilla",
+        hint: "Baking",
+        image: "/Featured%20%26%20New%20range/Natural%20Vanilla%20products.jpg",
+      },
+      {
+        name: "Rosella Soup Range",
+        hint: "Pantry",
+        image: "/Featured%20%26%20New%20range/Rosella%20soup%20range.jpg",
+      },
+      {
+        name: "CocoCoast Coconut Water",
+        hint: "Beverages",
+        image: "/Featured%20%26%20New%20range/CocoCoast%20coconut%20water.jpg",
+      },
+      {
+        name: "De-Solv-it Airfreshners",
+        hint: "Household",
+        image: "/Featured%20%26%20New%20range/De-Solv-it%20Airfreshners.jpg",
+      },
     ],
   },
 
@@ -192,24 +220,21 @@ export const siteContent = {
     items: [
       {
         title: "Team News",
-        issue: "July 2025",
-        coverImage:
-          "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=900&q=80",
-        pdfUrl: "/api/newsletter-pdf",
+        issue: "Dec 2025",
+        coverImage: "/Supermarketing%20Logo/re.png",
+        pdfUrl: "/Newsletter/4%20Dec%202025.pdf",
+      },
+      {
+        title: "Team News",
+        issue: "Sept 2025",
+        coverImage: "/Supermarketing%20Logo/re.png",
+        pdfUrl: "/Newsletter/3%20Sept%202025.pdf",
       },
       {
         title: "Team News",
         issue: "June 2025",
-        coverImage:
-          "https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=900&q=80",
-        pdfUrl: "/api/newsletter-pdf",
-      },
-      {
-        title: "Team News",
-        issue: "May 2025",
-        coverImage:
-          "https://images.unsplash.com/photo-1529429617124-aee711f7f3c3?auto=format&fit=crop&w=900&q=80",
-        pdfUrl: "/api/newsletter-pdf",
+        coverImage: "/Supermarketing%20Logo/re.png",
+        pdfUrl: "/Newsletter/2%20June%202025.pdf",
       },
     ],
   },
