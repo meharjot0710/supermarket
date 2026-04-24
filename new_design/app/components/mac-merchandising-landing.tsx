@@ -25,48 +25,60 @@ type MacMerchandisingLandingProps = {
 export default function MacMerchandisingLanding({
   heroContent,
 }: MacMerchandisingLandingProps) {
-  const { services, trustedBrands } = siteContent;
-  const hero = heroContent ?? siteContent.hero;
+  const { services, trustedBrands, hero: defaultHero } = siteContent;
+  const hero = heroContent ?? defaultHero;
 
   return (
     <div className="flex flex-col">
       <section
-        className="text-white"
+        className="overflow-hidden text-white"
         style={{ backgroundColor: "var(--mac-hero-blue)" }}
       >
-        <div className="mx-auto grid max-w-7xl gap-12 px-5 py-12 sm:px-8 sm:py-16 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-center lg:gap-14 lg:py-20">
-          <div className="max-w-xl lg:max-w-none">
-            <MacLogo variant="light" className="mb-8" />
-            <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-white bg-black px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-white sm:text-xs">
-              <span className="inline-block size-1.5 rounded-full bg-white" />
-              {hero.badge}
-            </div>
-            <p className="mb-10 max-w-xl text-base leading-relaxed text-white/90 sm:text-lg">
+        <div className="mx-auto grid max-w-7xl gap-8 px-5 py-8 sm:gap-10 sm:px-8 sm:py-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-start lg:gap-12 lg:py-12">
+          <div className="max-w-xl text-left lg:max-w-none">
+            <MacLogo variant="light" size="hero" className="mb-5 sm:mb-6" />
+            {/* <div className="mb-6 inline-flex max-w-full items-center gap-2 rounded-full border border-white/85 bg-white/12 px-3 py-1.5 text-[10px] font-semibold uppercase leading-snug tracking-[0.12em] text-white sm:mb-8 sm:px-4 sm:py-2 sm:text-[11px] sm:tracking-[0.16em]">
+              <span
+                className="inline-block size-1.5 shrink-0 rounded-full bg-white"
+                aria-hidden
+              />
+              <span className="min-w-0">{hero.badge}</span>
+            </div> */}
+            <h1
+              className="font-heading mb-6 max-w-xl text-[1.65rem] font-bold uppercase leading-[1.06] tracking-tight sm:mb-8 sm:text-4xl sm:leading-[1.05] lg:max-w-2xl lg:text-5xl xl:text-6xl"
+              style={{ color: "var(--mac-hero-heading)" }}
+            >
               {hero.subtitle}
-            </p>
-            <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap">
+            </h1>
+            {/* <p className="mb-8 max-w-xl text-base font-normal normal-case leading-relaxed text-white/90 sm:mb-10 sm:text-lg">
+              {hero.subtitle}
+            </p> */}
+            <div className="flex flex-col items-stretch gap-4 sm:flex-row sm:flex-wrap sm:items-start sm:gap-5">
               <Link
-                href={hero.ctaPrimary.href}
-                className="inline-flex items-center justify-center rounded-xl bg-black px-8 py-4 text-base font-medium text-white shadow-[0_18px_40px_-12px_rgba(0,0,0,0.55)] transition hover:bg-neutral-900"
+                href={siteContent.hero.ctaPrimary.href}
+                className="inline-flex min-h-[3rem] flex-1 items-center justify-center rounded-xl bg-black px-8 py-3.5 text-center text-base font-medium text-white shadow-[0_14px_36px_-14px_rgba(0,0,0,0.55)] transition hover:bg-neutral-900 sm:flex-initial sm:min-h-0 sm:px-8 sm:py-4"
               >
-                {hero.ctaPrimary.label}
+                {siteContent.hero.ctaPrimary.label}
               </Link>
               <Link
-                href={hero.ctaSecondary.href}
-                className="inline-flex items-center justify-center rounded-xl border-2 border-white/70 bg-transparent px-8 py-4 text-base font-medium text-white transition hover:bg-white/10"
+                href={siteContent.hero.ctaSecondary.href}
+                className="inline-flex min-h-[3rem] flex-1 items-center justify-center rounded-xl border-2 border-white bg-transparent px-8 py-3.5 text-center text-base font-medium text-white transition hover:bg-white/10 sm:flex-initial sm:min-h-0 sm:px-8 sm:py-4"
               >
-                {hero.ctaSecondary.label}
+                {siteContent.hero.ctaSecondary.label}
               </Link>
             </div>
           </div>
           <div className="flex justify-center lg:justify-end">
-            <HeroBrandCardsAutoScroll />
+            <HeroBrandCardsAutoScroll variant="hero" />
           </div>
         </div>
       </section>
 
       {/* Intro */}
       <section className="bg-white py-14 sm:py-20">
+        <h2 className="font-heading mb-8 text-center text-4xl font-bold uppercase tracking-tight text-black sm:text-5xl">
+            About US
+        </h2>
         <div className="mx-auto max-w-3xl px-5 text-center text-base leading-relaxed text-neutral-700 sm:px-8 sm:text-lg">
           <p>{siteContent.intro}</p>
         </div>
@@ -75,7 +87,10 @@ export default function MacMerchandisingLanding({
       {/* <SiteHeaderBar /> */}
 
       {/* Services */}
-      <section className="bg-white pb-20 pt-14 sm:pb-28 sm:pt-20">
+      <section
+        id="services"
+        className="scroll-mt-20 bg-white pb-20 pt-14 sm:pb-28 sm:pt-20"
+      >
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <p className="mb-2 text-center text-xs font-semibold uppercase tracking-[0.35em] text-neutral-500">
             {services.eyebrow}

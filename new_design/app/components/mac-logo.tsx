@@ -1,12 +1,26 @@
 import Image from "next/image";
 import Link from "next/link";
 
+const logoSizeClasses = {
+  default: "h-10 w-auto sm:h-12",
+  hero: "h-12 w-auto sm:h-14 md:h-16",
+} as const;
+
 type MacLogoProps = {
   variant?: "light" | "brand";
-  className?: string;
+  className?: string; 
+  /** Larger treatment for the home hero; header keeps default. */
+  size?: keyof typeof logoSizeClasses;
 };
 
-export function MacLogo({ variant = "brand", className = "" }: MacLogoProps) {
+export function MacLogo({
+  variant = "brand",
+  className = "",
+  size = "default",
+}: MacLogoProps) {
+  const intrinsic =
+    size === "hero" ? { width: 440, height: 112 } : { width: 220, height: 56 };
+
   return (
     <Link
       href="/"
@@ -18,9 +32,9 @@ export function MacLogo({ variant = "brand", className = "" }: MacLogoProps) {
       <Image
         src="/logo.png"
         alt=""
-        width={220}
-        height={56}
-        className="h-10 w-auto sm:h-12"
+        width={intrinsic.width}
+        height={intrinsic.height}
+        className={logoSizeClasses[size]}
         priority
       />
     </Link>

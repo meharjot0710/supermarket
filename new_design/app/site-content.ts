@@ -5,9 +5,13 @@
 
 export const siteContent = {
   hero: {
-    badge: "FMCG Wholesaler & Distributor | Australia",
+    badge: "FMCG Sales | Distribution| Merchandising | Brand Agents | Account Management | Australia",
     headline: "SuperMarketing",
-    headlineLine2: null as string | null,
+    headlineLines: [
+      "FMCG sales, distribution, and merchandising",
+      "for brands and independents across",
+      "Australia's supermarket network.",
+    ],
     subtitle:
       "Australia's trusted FMCG wholesaler supplying independent supermarkets with quality products, competitive pricing, and reliable national distribution.",
     ctaPrimary: { label: "Brands / Suppliers", href: "/contact?from=brands" },

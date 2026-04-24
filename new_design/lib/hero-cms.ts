@@ -12,6 +12,8 @@ type HeroDoc = {
 export type ResolvedHeroContent = {
   badge: string;
   headline: string;
+  /** Stacked main title; use newlines in CMS `headline` to override. */
+  headlineLines: string[];
   subtitle: string;
   ctaPrimary: { label: string; href: string };
   ctaSecondary: { label: string; href: string };
@@ -19,6 +21,19 @@ export type ResolvedHeroContent = {
 
 function asString(value: unknown): string | null {
   return typeof value === "string" && value.trim().length > 0 ? value : null;
+}
+
+function headlineLinesFromString(
+  headline: string | null,
+  fallbackLines: readonly string[],
+): string[] {
+  if (!headline) return [...fallbackLines];
+  const parts = headline
+    .split(/\n/)
+    .map((s) => s.trim())
+    .filter(Boolean);
+  if (parts.length > 0) return [...parts];
+  return [...fallbackLines];
 }
 
 export async function loadHeroFromDb(): Promise<ResolvedHeroContent> {
@@ -29,6 +44,7 @@ export async function loadHeroFromDb(): Promise<ResolvedHeroContent> {
     return {
       badge: fallback.badge,
       headline: fallback.headline,
+      headlineLines: [...fallback.headlineLines],
       subtitle: fallback.subtitle,
       ctaPrimary: { ...fallback.ctaPrimary },
       ctaSecondary: { ...fallback.ctaSecondary },
@@ -41,15 +57,22 @@ export async function loadHeroFromDb(): Promise<ResolvedHeroContent> {
       return {
         badge: fallback.badge,
         headline: fallback.headline,
+        headlineLines: [...fallback.headlineLines],
         subtitle: fallback.subtitle,
         ctaPrimary: { ...fallback.ctaPrimary },
         ctaSecondary: { ...fallback.ctaSecondary },
       };
     }
 
+    const headlineStr = asString(doc.headline) ?? fallback.headline;
+
     return {
       badge: asString(doc.tagline) ?? fallback.badge,
-      headline: asString(doc.headline) ?? fallback.headline,
+      headline: headlineStr,
+      headlineLines: headlineLinesFromString(
+        asString(doc.headline),
+        fallback.headlineLines,
+      ),
       subtitle: asString(doc.subtitle) ?? fallback.subtitle,
       ctaPrimary: {
         href: fallback.ctaPrimary.href,
@@ -65,6 +88,7 @@ export async function loadHeroFromDb(): Promise<ResolvedHeroContent> {
     return {
       badge: fallback.badge,
       headline: fallback.headline,
+      headlineLines: [...fallback.headlineLines],
       subtitle: fallback.subtitle,
       ctaPrimary: { ...fallback.ctaPrimary },
       ctaSecondary: { ...fallback.ctaSecondary },

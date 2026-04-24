@@ -3,6 +3,14 @@
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 
+/** Subset used in the home hero (taller stacks use the full list below). */
+const HERO_BRAND_LOGO_FILES = [
+  "GFresh Logo.jpg",
+  "Bow Wow Logo.png",
+  "CAPI_LOGO_RED.png",
+  "Rosella Logo.png",
+] as const;
+
 const BRAND_LOGO_FILES = [
   // Requested lead sequence
   "GFresh Logo.jpg",
@@ -72,7 +80,14 @@ function BrandCard({ filename }: { filename: string }) {
   );
 }
 
-export function HeroBrandCardsAutoScroll() {
+type HeroBrandCardsAutoScrollProps = {
+  /** When true, only hero logos and a shorter viewport (default for home hero). */
+  variant?: "hero" | "full";
+};
+
+export function HeroBrandCardsAutoScroll({
+  variant = "hero",
+}: HeroBrandCardsAutoScrollProps) {
   const trackRef = useRef<HTMLDivElement | null>(null);
   const sequenceRef = useRef<HTMLDivElement | null>(null);
 
@@ -121,28 +136,40 @@ export function HeroBrandCardsAutoScroll() {
     };
   }, []);
 
+  const files =
+    variant === "hero"
+      ? HERO_BRAND_LOGO_FILES
+      : (BRAND_LOGO_FILES as readonly string[]);
+
+  const viewportHeightClass =
+    variant === "hero"
+      ? "h-[min(19rem,42vh)] sm:h-[min(21rem,46vh)]"
+      : "h-[min(32rem,72vh)] sm:h-[min(36rem,75vh)]";
+
   return (
     <div
       className="mx-auto w-full max-w-[min(100%,20rem)] lg:mx-0 lg:max-w-[18.5rem]"
       aria-hidden
     >
-      <div className="relative h-[min(32rem,72vh)] overflow-x-visible overflow-y-hidden px-2 sm:h-[min(36rem,75vh)] sm:px-3">
-        <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-16 bg-gradient-to-b from-[var(--mac-hero-blue)] to-transparent" />
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-16 bg-gradient-to-t from-[var(--mac-hero-blue)] to-transparent" />
+      <div
+        className={`relative overflow-x-visible overflow-y-hidden px-2 sm:px-3 ${viewportHeightClass}`}
+      >
+        <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-12 bg-gradient-to-b from-[var(--mac-hero-blue)] to-transparent sm:h-14" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-12 bg-gradient-to-t from-[var(--mac-hero-blue)] to-transparent sm:h-14" />
 
-        <div className="flex h-full items-stretch justify-center pt-2 pb-4">
+        <div className="flex h-full items-stretch justify-center pt-1 pb-2 sm:pt-2 sm:pb-3">
           <div
             ref={trackRef}
-            className="flex w-full flex-col gap-4 will-change-transform"
+            className="flex w-full flex-col gap-3 will-change-transform sm:gap-4"
             style={{ transformOrigin: "50% 50%" }}
           >
-            <div ref={sequenceRef} className="flex w-full flex-col gap-4">
-              {BRAND_LOGO_FILES.map((filename, i) => (
+            <div ref={sequenceRef} className="flex w-full flex-col gap-3 sm:gap-4">
+              {files.map((filename, i) => (
                 <BrandCard key={`${brandId(filename)}-a-${i}`} filename={filename} />
               ))}
             </div>
-            <div className="flex w-full flex-col gap-4" aria-hidden>
-              {BRAND_LOGO_FILES.map((filename, i) => (
+            <div className="flex w-full flex-col gap-3 sm:gap-4" aria-hidden>
+              {files.map((filename, i) => (
                 <BrandCard key={`${brandId(filename)}-b-${i}`} filename={filename} />
               ))}
             </div>
