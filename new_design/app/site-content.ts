@@ -153,7 +153,7 @@ export const siteContent = {
     stats: [
       { v: "25+", l: "Years experience" },
       { v: "1,000+", l: "Products" },
-      { v: "250+", l: "Brands" },
+      { v: "50+", l: "Brands" },
     ],
     statsEyebrow: "Trusted nationwide",
     statsTitle: "Australia-wide",
