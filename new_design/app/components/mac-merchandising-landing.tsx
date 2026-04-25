@@ -4,6 +4,7 @@ import { FeaturedProductsMarquee } from "./featured-products-marquee";
 import { HeroBrandCardsAutoScroll } from "./hero-brand-cards-auto-scroll";
 import { MacLogo } from "./mac-logo";
 import { NewsletterCatalogueStrip } from "./newsletter-catalogue-strip";
+import { ScrollReveal } from "./scroll-reveal";
 import { ServiceImageCarousel } from "./service-image-carousel";
 import { SiteHeaderBar } from "./site-header-bar";
 import { TrustedBrandLogoMarquee } from "./trusted-brand-logo-marquee";
@@ -34,7 +35,7 @@ export default function MacMerchandisingLanding({
         className="overflow-hidden text-white"
         style={{ backgroundColor: "var(--mac-hero-blue)" }}
       >
-        <div className="mx-auto grid max-w-7xl gap-8 px-5 py-8 sm:gap-10 sm:px-8 sm:py-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-start lg:gap-12 lg:py-12">
+        <ScrollReveal className="mx-auto grid max-w-7xl gap-8 px-5 py-8 sm:gap-10 sm:px-8 sm:py-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-start lg:gap-12 lg:py-12">
           <div className="max-w-xl text-left lg:max-w-none">
             <MacLogo variant="light" size="hero" className="mb-5 sm:mb-6" />
             {/* <div className="mb-6 inline-flex max-w-full items-center gap-2 rounded-full border border-white/85 bg-white/12 px-3 py-1.5 text-[10px] font-semibold uppercase leading-snug tracking-[0.12em] text-white sm:mb-8 sm:px-4 sm:py-2 sm:text-[11px] sm:tracking-[0.16em]">
@@ -71,17 +72,19 @@ export default function MacMerchandisingLanding({
           <div className="flex justify-center lg:justify-end">
             <HeroBrandCardsAutoScroll variant="hero" />
           </div>
-        </div>
+        </ScrollReveal>
       </section>
 
       {/* Intro */}
-      <section className="bg-white py-14 sm:py-20">
-        <h2 className="font-heading mb-8 text-center text-4xl font-bold uppercase tracking-tight text-black sm:text-5xl">
+      <section className="bg-white py-10 sm:py-14">
+        <ScrollReveal className="mx-auto max-w-3xl px-5 text-center sm:px-8">
+          <h2 className="font-heading mb-8 text-center text-4xl font-bold uppercase tracking-tight text-black sm:text-5xl">
             About US
-        </h2>
-        <div className="mx-auto max-w-3xl px-5 text-center text-base leading-relaxed text-neutral-700 sm:px-8 sm:text-lg">
-          <p>{siteContent.intro}</p>
-        </div>
+          </h2>
+          <div className="text-base leading-relaxed text-neutral-700 sm:text-lg">
+            <p>{siteContent.intro}</p>
+          </div>
+        </ScrollReveal>
       </section>
 
       {/* <SiteHeaderBar /> */}
@@ -89,9 +92,9 @@ export default function MacMerchandisingLanding({
       {/* Services */}
       <section
         id="services"
-        className="scroll-mt-20 bg-white pb-20 pt-14 sm:pb-28 sm:pt-20"
+        className="scroll-mt-20 bg-white pb-12 pt-10 sm:pb-16 sm:pt-14"
       >
-        <div className="mx-auto max-w-7xl px-5 sm:px-8">
+        <ScrollReveal className="mx-auto max-w-7xl px-5 sm:px-8">
           <p className="mb-2 text-center text-xs font-semibold uppercase tracking-[0.35em] text-neutral-500">
             {services.eyebrow}
           </p>
@@ -118,8 +121,9 @@ export default function MacMerchandisingLanding({
           </div>
 
           <div className="grid gap-12 md:grid-cols-3 md:gap-8">
-            {services.columns.map((col) => (
-              <article key={col.title}>
+            {services.columns.map((col, i) => (
+              <ScrollReveal key={col.title} delayMs={i * 120}>
+                <article>
                 <div className="relative mb-6 aspect-[4/3] overflow-hidden rounded-2xl bg-neutral-100 shadow-sm ring-1 ring-black/5">
                   <ServiceImageCarousel
                     images={col.images}
@@ -138,35 +142,36 @@ export default function MacMerchandisingLanding({
                 <p className="mt-4 text-sm leading-relaxed text-[var(--mac-muted)]">
                   {col.footer}
                 </p>
-              </article>
+                </article>
+              </ScrollReveal>
             ))}
           </div>
-        </div>
+        </ScrollReveal>
       </section>
 
       {/* Trusted by */}
-      <section className="border-y border-neutral-200 bg-neutral-50 py-14">
-        <div className="mx-auto max-w-7xl px-5 sm:px-8">
+      <section className="border-y border-neutral-200 bg-neutral-50 py-10 sm:py-12">
+        <ScrollReveal className="mx-auto max-w-7xl px-5 sm:px-8">
           <h2 className="font-heading mb-8 text-center text-2xl font-bold uppercase tracking-tight text-black sm:text-3xl">
             {trustedBrands.title}
           </h2>
           <TrustedBrandLogoMarquee brands={trustedBrands.names} />
-        </div>
+        </ScrollReveal>
       </section>
 
       {/* Featured range */}
-      <section className="border-t border-neutral-200 bg-neutral-50 py-14">
-        <div className="mx-auto max-w-7xl px-5 sm:px-8">
+      <section className="border-t border-neutral-200 bg-neutral-50 py-10 sm:py-12">
+        <ScrollReveal className="mx-auto max-w-7xl px-5 sm:px-8">
           <h2 className="font-heading mb-8 text-center text-3xl font-bold uppercase tracking-tight text-black sm:text-4xl">
             {siteContent.featuredProducts.title}
           </h2>
           <FeaturedProductsMarquee items={siteContent.featuredProducts.items} />
-        </div>
+        </ScrollReveal>
       </section>
 
       {/* Story */}
-      <section className="bg-neutral-900 py-16 text-white sm:py-24">
-        <div className="mx-auto max-w-7xl px-5 sm:px-8">
+      <section className="bg-neutral-900 py-12 text-white sm:py-16">
+        <ScrollReveal className="mx-auto max-w-7xl px-5 sm:px-8">
           <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
             <div>
               <h2 className="font-heading mb-4 text-4xl font-bold uppercase leading-tight tracking-tight sm:text-5xl">
@@ -205,123 +210,120 @@ export default function MacMerchandisingLanding({
               </div>
             </div>
           </div>
-        </div>
+        </ScrollReveal>
       </section>
 
       {/* <SiteHeaderBar /> */}
 
       {/* What makes us different */}
-      <section className="bg-white py-16 sm:py-24">
-        <div className="mx-auto max-w-7xl px-5 sm:px-8">
+      <section className="bg-white py-10 sm:py-14">
+        <ScrollReveal className="mx-auto max-w-7xl px-5 sm:px-8">
           <h2 className="font-heading mb-6 text-center text-4xl font-bold uppercase leading-tight tracking-tight text-black sm:text-5xl">
             {siteContent.differentiators.title}
             <br />
             {siteContent.differentiators.titleAccent}
           </h2>
-          <p className="mx-auto mb-14 max-w-3xl text-center text-base leading-relaxed text-[var(--mac-muted)] sm:text-lg">
+          <p className="mx-auto mb-8 max-w-3xl text-center text-base leading-relaxed text-[var(--mac-muted)] sm:text-lg">
             {siteContent.differentiators.intro}
           </p>
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {siteContent.differentiators.cards.map((item) => (
-              <article
-                key={item.title}
-                className="flex flex-col rounded-2xl border border-neutral-200 bg-neutral-50/60 p-6 shadow-sm"
-              >
-                <div className="relative mb-4 aspect-video w-full overflow-hidden rounded-xl bg-neutral-200">
-                  {"image" in item ? (
-                    <Image
-                      src={item.image}
-                      alt={item.title}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                    />
-                  ) : null}
-                </div>
-                <h3 className="mb-2 text-lg font-bold text-black">{item.title}</h3>
-                <p className="text-sm leading-relaxed text-[var(--mac-muted)]">
-                  {item.body}
-                </p>
-              </article>
+            {siteContent.differentiators.cards.map((item, i) => (
+              <ScrollReveal key={item.title} delayMs={i * 110}>
+                <article className="flex flex-col rounded-2xl border border-neutral-200 bg-neutral-50/60 p-6 shadow-sm">
+                  <div className="relative mb-4 aspect-video w-full overflow-hidden rounded-xl bg-neutral-200">
+                    {"image" in item ? (
+                      <Image
+                        src={item.image}
+                        alt={item.title}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                      />
+                    ) : null}
+                  </div>
+                  <h3 className="mb-2 text-lg font-bold text-black">{item.title}</h3>
+                  <p className="text-sm leading-relaxed text-[var(--mac-muted)]">
+                    {item.body}
+                  </p>
+                </article>
+              </ScrollReveal>
             ))}
           </div>
-        </div>
+        </ScrollReveal>
       </section>
 
       {/* <SiteHeaderBar /> */}
 
       {/* Team */}
-      <section className="bg-white py-16 sm:py-24">
-        <div className="mx-auto max-w-7xl px-5 sm:px-8">
+      <section className="bg-white pt-8 pb-10 sm:pt-10 sm:pb-14">
+        <ScrollReveal className="mx-auto max-w-7xl px-5 sm:px-8">
           <h2 className="font-heading mb-4 text-center text-4xl font-bold uppercase tracking-tight text-black sm:text-5xl">
             {siteContent.team.title}
           </h2>
-          <p className="font-heading mb-12 text-center text-4xl font-bold uppercase tracking-tight text-[var(--mac-teal)] sm:text-5xl">
+          <p className="font-heading mb-6 text-center text-4xl font-bold uppercase tracking-tight text-[var(--mac-teal)] sm:text-5xl">
             {siteContent.team.titleAccent}
           </p>
-          <p className="mx-auto mb-10 max-w-3xl text-center text-sm leading-relaxed text-[var(--mac-muted)] sm:text-base">
+          <p className="mx-auto mb-7 max-w-3xl text-center text-sm leading-relaxed text-[var(--mac-muted)] sm:text-base">
             Meet the team behind SuperMarketing's commitment to quality and service.
           </p>
           <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-3">
-            {siteContent.about.leadership.map((person) => (
-              <article
-                key={`${person.name}-${person.title}`}
-                className="flex flex-col rounded-2xl border border-neutral-200 bg-neutral-50/70 p-6 shadow-sm"
-              >
-                <div className="relative mb-5 aspect-[4/5] w-full overflow-hidden rounded-xl bg-neutral-200">
-                  <Image
-                    src={person.image}
-                    alt={person.name}
-                    fill
-                    className="object-cover object-top"
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                  />
-                </div>
-                <p className="text-lg font-bold text-black">{person.name}</p>
-                <p className="mb-3 text-[11px] font-bold uppercase tracking-widest text-[var(--mac-teal)]">
-                  {person.title}
-                </p>
-                <p className="text-sm leading-relaxed text-[var(--mac-muted)]">
-                  {person.shortMessage}
-                </p>
-              </article>
+            {siteContent.about.leadership.map((person, i) => (
+              <ScrollReveal key={`${person.name}-${person.title}`} delayMs={i * 130}>
+                <article className="flex flex-col rounded-2xl border border-neutral-200 bg-neutral-50/70 p-6 shadow-sm">
+                  <div className="relative mb-5 aspect-[4/5] w-full overflow-hidden rounded-xl bg-neutral-200">
+                    <Image
+                      src={person.image}
+                      alt={person.name}
+                      fill
+                      className="object-cover object-top"
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                    />
+                  </div>
+                  <p className="text-lg font-bold text-black">{person.name}</p>
+                  <p className="mb-3 text-[11px] font-bold uppercase tracking-widest text-[var(--mac-teal)]">
+                    {person.title}
+                  </p>
+                  <p className="text-sm leading-relaxed text-[var(--mac-muted)]">
+                    {person.shortMessage}
+                  </p>
+                </article>
+              </ScrollReveal>
             ))}
           </div>
-        </div>
+        </ScrollReveal>
       </section>
 
       <NewsletterCatalogueStrip items={siteContent.newsletterCatalogue.items} />
 
       {/* Why partner */}
-      <section className="bg-white py-16 sm:py-24">
-        <div className="mx-auto max-w-7xl px-5 sm:px-8">
-          <h2 className="font-heading mb-14 text-center text-4xl font-bold uppercase leading-tight tracking-tight text-black sm:text-5xl">
+      <section className="bg-white py-10 sm:py-14">
+        <ScrollReveal className="mx-auto max-w-7xl px-5 sm:px-8">
+          <h2 className="font-heading mb-8 text-center text-4xl font-bold uppercase leading-tight tracking-tight text-black sm:text-5xl">
             {siteContent.whyPartner.title}
             <br />
             {siteContent.whyPartner.titleLine2}
           </h2>
           <div className="grid gap-8 md:grid-cols-2">
-            {siteContent.whyPartner.cards.map((c) => (
-              <article
-                key={c.title}
-                className="rounded-2xl border border-neutral-200 bg-neutral-50/80 p-8 shadow-sm"
-              >
-                <h3 className="mb-2 text-xl font-bold text-black">{c.title}</h3>
-                <p className="text-base leading-relaxed text-[var(--mac-muted)]">
-                  {c.subtitle}
-                </p>
-              </article>
+            {siteContent.whyPartner.cards.map((c, i) => (
+              <ScrollReveal key={c.title} delayMs={i * 120}>
+                <article className="rounded-2xl border border-neutral-200 bg-neutral-50/80 p-8 shadow-sm">
+                  <h3 className="mb-2 text-xl font-bold text-black">{c.title}</h3>
+                  <p className="text-base leading-relaxed text-[var(--mac-muted)]">
+                    {c.subtitle}
+                  </p>
+                </article>
+              </ScrollReveal>
             ))}
           </div>
-          <p className="mt-12 text-center text-sm font-semibold uppercase tracking-[0.2em] text-[var(--mac-teal)]">
+          <p className="mt-8 text-center text-sm font-semibold uppercase tracking-[0.2em] text-[var(--mac-teal)]">
             {siteContent.whyPartner.footnote}
           </p>
-        </div>
+        </ScrollReveal>
       </section>
 
       {/* CTA + footer */}
-      <section className="border-t border-neutral-200 bg-[var(--mac-header-gray)] py-16 sm:py-20">
-        <div className="mx-auto max-w-7xl px-5 sm:px-8">
+      <section className="border-t border-neutral-200 bg-[var(--mac-header-gray)] py-12 sm:py-14">
+        <ScrollReveal className="mx-auto max-w-7xl px-5 sm:px-8">
           <div className="mx-auto max-w-3xl text-center">
             <h2 className="font-heading text-4xl font-bold uppercase leading-tight tracking-tight text-black sm:text-5xl">
               {siteContent.cta.headline1}
@@ -337,7 +339,7 @@ export default function MacMerchandisingLanding({
             </p>
           </div>
 
-          <div className="mx-auto mt-12 grid max-w-3xl gap-8 sm:grid-cols-2">
+          <div className="mx-auto mt-8 grid max-w-3xl gap-8 sm:grid-cols-2">
             {siteContent.cta.contacts.map((block) => (
               <div
                 key={block.title}
@@ -357,7 +359,7 @@ export default function MacMerchandisingLanding({
             ))}
           </div>
 
-          <footer className="mt-16 flex flex-col items-center gap-4 border-t border-neutral-300 pt-10 text-center text-sm text-neutral-600">
+          <footer className="mt-10 flex flex-col items-center gap-4 border-t border-neutral-300 pt-8 text-center text-sm text-neutral-600">
             <p>
               © {new Date().getFullYear()} {siteContent.footer.copyright}.
             </p>
@@ -373,7 +375,7 @@ export default function MacMerchandisingLanding({
               {siteContent.footer.tagline}
             </p>
           </footer>
-        </div>
+        </ScrollReveal>
       </section>
     </div>
   );

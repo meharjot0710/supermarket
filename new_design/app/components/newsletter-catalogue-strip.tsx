@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useRef } from "react";
+import { ScrollReveal } from "./scroll-reveal";
 
 type NewsletterItem = {
   title: string;
@@ -24,8 +25,8 @@ export function NewsletterCatalogueStrip({ items }: { items: readonly Newsletter
   };
 
   return (
-    <section className="bg-white py-14 sm:py-16">
-      <div className="mx-auto max-w-7xl px-5 sm:px-8">
+    <section className="bg-white py-10 sm:py-12">
+      <ScrollReveal className="mx-auto max-w-7xl px-5 sm:px-8">
         <div className="mb-8 text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.35em] text-[var(--mac-teal)]">
             Stay updated
@@ -100,7 +101,7 @@ export function NewsletterCatalogueStrip({ items }: { items: readonly Newsletter
             →
           </button>
         </div>
-      </div>
+      </ScrollReveal>
     </section>
   );
 }
