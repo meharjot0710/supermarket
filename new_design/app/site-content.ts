@@ -301,7 +301,7 @@ export const siteContent = {
     credit: null as string | null,
     tagline: "FMCG wholesaler & distributor",
     address: "Unit 6/29 Business Park Drive, Notting Hill Victoria 3168",
-    email: "Info@supermarketing.com.au",
+    email: "Admin@supermarketing.com.au",
     phone: "03 9894 2212",
     socialLinks: [
       {
