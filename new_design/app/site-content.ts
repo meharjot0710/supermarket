@@ -103,6 +103,8 @@ export const siteContent = {
   },
 
   trustedRetailers: {
+    title:
+      "Trusted and long-term relationships across Australia's independent retail network.",
     names: [
       "Ritchies",
       "Champions",
@@ -139,12 +141,14 @@ export const siteContent = {
       {
         title: "National footprint",
         body: "From our early days servicing local retailers to today's national footprint, we stay focused on helping brands reach the right shelves and stores access the right products.",
+        image:
+          "/National%20footprint/d872100c-029a-4a8e-a463-b4f9666e7e90.png",
       },
       {
         title: "Integrity & delivery",
         body: "For over two decades our values have stayed the same: integrity, communication, and delivery — ensuring satisfaction across the supermarket industry.",
         image:
-          "/Integrity%20%26%20delivery/6ec5b51d-e571-4237-b56d-5e56afa146ac%20-%20Copy.png",
+          "/Integrity%20%26%20delivery/6ec5b51d-e571-4237-b56d-5e56afa146ac - Copy.png",
       },
     ],
   },
@@ -296,6 +300,23 @@ export const siteContent = {
     copyright: "SuperMarketing",
     credit: null as string | null,
     tagline: "FMCG wholesaler & distributor",
+    address: "Unit 6/29 Business Park Drive, Notting Hill Victoria 3168",
+    email: "Info@supermarketing.com.au",
+    phone: "03 9894 2212",
+    socialLinks: [
+      {
+        label: "LinkedIn",
+        href: "https://www.linkedin.com/company/supermarketingptyltd/",
+      },
+      {
+        label: "Facebook",
+        href: "https://www.facebook.com/share/1B4LZB7TfD/",
+      },
+      {
+        label: "Instagram",
+        href: "https://www.instagram.com/supermarketingau?igsh=YjZ4dGVjeHZ6ZGhs",
+      },
+    ],
   },
 
   about: {
@@ -314,25 +335,25 @@ export const siteContent = {
     leadershipIntro: "Meet the team behind our commitment to quality and service.",
     leadership: [
       {
-        name: "Harry",
+        name: "Harry Vetos",
         title: "Director",
         shortMessage:
-          "Leading our vision for growth and long-term partnership with brands and retailers across Australia.",
+          "Harry Vetos, co-founder of Supermarketing, leads with experience, strong relationships, and a culture-driven, results-focused approach.",
         image: "/Team/Harry%20Vetos.png",
       },
       {
-        name: "Mina",
+        name: "Mina Vetos",
         title: "Director",
         shortMessage:
-          "Driving excellence in supply chain, operations, and our commitment to quality and reliability.",
+          "Mina Vetos, co-founder of Supermarketing Pty Ltd, shapes operations through strategic insight, strong governance, and a focus on sustainable growth and team excellence.",
         image:
-          "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=400&auto=format&fit=crop",
+          "/Team/Mina.png",
       },
       {
-        name: "Justin",
+        name: "Justin Loos",
         title: "General Manager",
         shortMessage:
-          "Ensuring day-to-day delivery, client success, and the hands-on support our partners rely on.",
+          "Justin Loos brings 20+ years’ FMCG experience, driving innovation, strong partnerships, and value-led growth across independent supermarkets and suppliers",
         image: "/Team/Justin%20loos.JPG",
       },
     ],

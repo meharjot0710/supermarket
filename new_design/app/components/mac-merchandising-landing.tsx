@@ -8,6 +8,7 @@ import { ScrollReveal } from "./scroll-reveal";
 import { ServiceImageCarousel } from "./service-image-carousel";
 import { SiteHeaderBar } from "./site-header-bar";
 import { TrustedBrandLogoMarquee } from "./trusted-brand-logo-marquee";
+import { TrustedRetailerLogoMarquee } from "./trusted-retailer-logo-marquee";
 import { siteContent } from "../site-content";
 import type { ResolvedHeroContent } from "@/lib/hero-cms";
 
@@ -26,7 +27,7 @@ type MacMerchandisingLandingProps = {
 export default function MacMerchandisingLanding({
   heroContent,
 }: MacMerchandisingLandingProps) {
-  const { services, trustedBrands, hero: defaultHero } = siteContent;
+  const { services, trustedBrands, trustedRetailers, hero: defaultHero } = siteContent;
   const hero = heroContent ?? defaultHero;
 
   return (
@@ -215,6 +216,16 @@ export default function MacMerchandisingLanding({
 
       {/* <SiteHeaderBar /> */}
 
+      {/* Trusted retailers */}
+      <section className="border-y border-neutral-200 bg-neutral-50 py-10 sm:py-12">
+        <ScrollReveal className="mx-auto max-w-7xl px-5 sm:px-8">
+          <h2 className="font-heading mb-8 text-center text-2xl font-bold uppercase tracking-tight text-black sm:text-3xl">
+            {trustedRetailers.title}
+          </h2>
+          <TrustedRetailerLogoMarquee names={trustedRetailers.names} />
+        </ScrollReveal>
+      </section>
+
       {/* What makes us different */}
       <section className="bg-white py-10 sm:py-14">
         <ScrollReveal className="mx-auto max-w-7xl px-5 sm:px-8">
@@ -359,21 +370,56 @@ export default function MacMerchandisingLanding({
             ))}
           </div>
 
-          <footer className="mt-10 flex flex-col items-center gap-4 border-t border-neutral-300 pt-8 text-center text-sm text-neutral-600">
-            <p>
-              © {new Date().getFullYear()} {siteContent.footer.copyright}.
-            </p>
-            {siteContent.footer.credit ? (
-              <p className="text-xs text-neutral-500">{siteContent.footer.credit}</p>
-            ) : null}
-            <div className="flex gap-6 text-sm font-medium">
-              <Link className="text-[var(--mac-teal)] hover:underline" href="/contact">
-                Contact
-              </Link>
+          <footer className="mt-10 border-t border-neutral-300 pt-8 text-sm text-neutral-600">
+            <div className="grid gap-8 md:grid-cols-2 md:items-start">
+              <div className="text-center md:text-left">
+                <p>
+                  © {new Date().getFullYear()} {siteContent.footer.copyright}.
+                </p>
+                {siteContent.footer.credit ? (
+                  <p className="mt-1 text-xs text-neutral-500">{siteContent.footer.credit}</p>
+                ) : null}
+                <p className="mt-3 text-xs font-semibold uppercase tracking-[0.2em] text-neutral-500">
+                  {siteContent.footer.tagline}
+                </p>
+              </div>
+
+              <div className="space-y-3 text-center md:text-right">
+                <p>{siteContent.footer.address}</p>
+                <p>
+                  <a
+                    className="text-[var(--mac-teal)] hover:underline"
+                    href={`mailto:${siteContent.footer.email}`}
+                  >
+                    {siteContent.footer.email}
+                  </a>
+                </p>
+                <p>
+                  <a
+                    className="text-[var(--mac-teal)] hover:underline"
+                    href={`tel:${siteContent.footer.phone.replace(/\s+/g, "")}`}
+                  >
+                    {siteContent.footer.phone}
+                  </a>
+                </p>
+                <div className="flex flex-wrap justify-center gap-5 pt-1 text-sm font-medium md:justify-end">
+                  <Link className="text-[var(--mac-teal)] hover:underline" href="/contact">
+                    Contact
+                  </Link>
+                  {siteContent.footer.socialLinks.map((social) => (
+                    <Link
+                      key={social.label}
+                      className="text-[var(--mac-teal)] hover:underline"
+                      href={social.href}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {social.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
             </div>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-neutral-500">
-              {siteContent.footer.tagline}
-            </p>
           </footer>
         </ScrollReveal>
       </section>
