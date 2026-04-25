@@ -345,7 +345,7 @@ export const siteContent = {
         name: "Mina Vetos",
         title: "Director",
         shortMessage:
-          "Mina Vetos, co-founder of Supermarketing Pty Ltd, shapes operations through strategic insight, strong governance, and a focus on sustainable growth and team excellence.",
+          "Mina Vetos, co-founder of Supermarketing, shapes operations through strategic insight, strong governance, and a focus on sustainable growth and team excellence.",
         image:
           "/Team/Mina.png",
       },
@@ -353,7 +353,7 @@ export const siteContent = {
         name: "Justin Loos",
         title: "General Manager",
         shortMessage:
-          "Justin Loos brings 20+ years’ FMCG experience, driving innovation, strong partnerships, and value-led growth across independent supermarkets and suppliers",
+          "Justin Loos, GM of Supermarketing, brings 20+ years’ FMCG experience, driving innovation, strong partnerships, and value-led growth across independent supermarkets and suppliers",
         image: "/Team/Justin%20loos.JPG",
       },
     ],
