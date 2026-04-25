@@ -27,7 +27,7 @@ export function ScrollReveal({ children, className = "", delayMs = 0 }: ScrollRe
         setIsVisible(true);
         observer.unobserve(entry.target);
       },
-      { threshold: 0.22, rootMargin: "0px 0px -14% 0px" }
+      { threshold: 0.08, rootMargin: "0px 0px -4% 0px" }
     );
 
     observer.observe(element);
