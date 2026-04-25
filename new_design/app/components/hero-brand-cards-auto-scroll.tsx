@@ -11,7 +11,6 @@ const HERO_BRAND_LOGO_FILES = [
   "CAPI_LOGO_RED.png",
   "Rosella Logo.png","Astonish Logo.PNG",
   "Baby Mum-Mum.png",
-  "Buderim Logo.png",
   "Care Organic.JPG",
   "2025_CocoCoast_Logo_RGB_Natural.png",
   "CLR.png",
