@@ -118,6 +118,14 @@ export const siteContent = {
       "Bernardis",
       "Ashcrofts",
       "Supamart IGA",
+      "Ahmedi Group",
+      "Country Grocers",
+      "FoodWorks",
+      "OTR",
+      "Khans Group",
+      "Llyods Group",
+      "IGA",
+      "Retail Partner",
     ],
   },
 
@@ -201,11 +209,6 @@ export const siteContent = {
         name: "Natural Vanilla",
         hint: "Baking",
         image: "/Featured%20%26%20New%20range/Natural%20Vanilla%20products.jpg",
-      },
-      {
-        name: "Rosella Soup Range",
-        hint: "Pantry",
-        image: "/Featured%20%26%20New%20range/Rosella%20soup%20range.jpg",
       },
       {
         name: "CocoCoast Coconut Water",

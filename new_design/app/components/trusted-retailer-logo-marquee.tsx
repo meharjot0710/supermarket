@@ -13,6 +13,14 @@ const RETAILER_LOGO_BY_NAME: Record<string, string> = {
   Carlos: "79879carlos-iga.jpg",
   Bernardis: "38111bernardis.png",
   "Supamart IGA": "32331supamartpmswithtaglogo.png",
+  "Ahmedi Group": "Ahmedi group.PNG",
+  "Country Grocers": "Country grocers.PNG",
+  FoodWorks: "FoodWorks_Supermarket_logo.jpg",
+  OTR: "OTR.JPG",
+  "Khans Group": "kHANS GROUP.PNG",
+  "Llyods Group": "Llyods group.PNG",
+  IGA: "89383iga-1.png",
+  "Retail Partner": "WhatsApp Image 2026-04-27 at 11.42.52 AM.jpeg",
 };
 
 function logoSrc(filename: string) {
