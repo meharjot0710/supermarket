@@ -21,6 +21,7 @@ const RETAILER_LOGO_BY_NAME: Record<string, string> = {
   "Llyods Group": "Llyods group.PNG",
   IGA: "89383iga-1.png",
   "Retail Partner": "WhatsApp Image 2026-04-27 at 11.42.52 AM.jpeg",
+  "Australian Butcher Store": "australian-butcher-store-logo.png",
 };
 
 function logoSrc(filename: string) {

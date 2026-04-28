@@ -49,6 +49,9 @@ export const siteContent = {
           "/Field%20sales%20%26%20in-store%20execution/WhatsApp%20Image%202026-04-20%20at%2010.35.27%20AM.jpeg",
           "/Field%20sales%20%26%20in-store%20execution/WhatsApp%20Image%202026-04-24%20at%201.48.38%20PM.jpeg",
           "/Field%20sales%20%26%20in-store%20execution/WhatsApp%20Image%202026-04-24%20at%201.48.38%20PM%20(1).jpeg",
+          "/Field%20sales%20%26%20in-store%20execution/WhatsApp%20Image%202026-04-25%20at%207.38.33%20PM.jpeg",
+          "/Field%20sales%20%26%20in-store%20execution/WhatsApp%20Image%202026-04-25%20at%207.39.20%20PM.jpeg",
+          "/Field%20sales%20%26%20in-store%20execution/WhatsApp Image 2026-04-28 at 11.06.24 AM.jpeg",
         ],
         imageAlt: "Grocery retail aisle",
         title: "Field sales & in-store execution",
@@ -126,6 +129,7 @@ export const siteContent = {
       "Llyods Group",
       "IGA",
       "Retail Partner",
+      "Australian Butcher Store",
     ],
   },
 
@@ -220,6 +224,16 @@ export const siteContent = {
         hint: "Household",
         image: "/Featured%20%26%20New%20range/De-Solv-it%20Airfreshners.jpg",
       },
+      {
+        name: "Scrub Daddy Tangerine Clean",
+        hint: "Cleaning",
+        image: "/Featured%20%26%20New%20range/Scrub%20daddy%20Tangerine%20Clean.jpg",
+      },
+      {
+        name: "G-Fresh Popcorn Sprinkle",
+        hint: "Pantry",
+        image: "/Featured%20%26%20New%20range/Gfresh%20popcorn%20Sprinkle.PNG",
+      },
     ],
   },
 
@@ -242,6 +256,12 @@ export const siteContent = {
         issue: "June 2025",
         coverImage: "/Supermarketing%20Logo/re.png",
         pdfUrl: "/Newsletter/2%20June%202025.pdf",
+      },
+      {
+        title: "Team News",
+        issue: "Mar 2025",
+        coverImage: "/Supermarketing%20Logo/re.png",
+        pdfUrl: "/Newsletter/1%20March%202025.pdf",
       },
     ],
   },
