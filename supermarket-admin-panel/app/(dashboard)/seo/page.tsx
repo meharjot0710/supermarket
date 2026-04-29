@@ -15,7 +15,6 @@ export default function SeoPage() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState<{ type: "ok" | "err"; text: string } | null>(null);
-  const [editing, setEditing] = useState<SeoFields | null>(null);
 
   useEffect(() => {
     fetch("/api/seo")
@@ -43,7 +42,31 @@ export default function SeoPage() {
       const out = await res.json();
       if (!res.ok) throw new Error(out.error || "Save failed");
       setMessage({ type: "ok", text: "Saved." });
-      setEditing(null);
+      const listRes = await fetch("/api/seo");
+      const next = await listRes.json();
+      if (Array.isArray(next)) setList(next);
+    } catch (e) {
+      setMessage({ type: "err", text: e instanceof Error ? e.message : "Save failed" });
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const saveAll = async () => {
+    setSaving(true);
+    setMessage(null);
+    try {
+      for (const doc of list) {
+        if (!doc.pageKey.trim()) continue;
+        const res = await fetch("/api/seo", {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(doc),
+        });
+        const out = await res.json();
+        if (!res.ok) throw new Error(out.error || "Save failed");
+      }
+      setMessage({ type: "ok", text: "All SEO fields saved." });
       const listRes = await fetch("/api/seo");
       const next = await listRes.json();
       if (Array.isArray(next)) setList(next);
@@ -67,7 +90,9 @@ export default function SeoPage() {
   return (
     <div className="p-8 md:p-12 max-w-3xl">
       <h1 className="text-2xl font-bold text-zinc-900 mb-2">SEO</h1>
-      <p className="text-zinc-600 text-sm mb-6">Page titles and meta descriptions. Layout and templates are fixed.</p>
+      <p className="text-zinc-600 text-sm mb-6">
+        Enter SEO fields directly for each page. Layout and templates are fixed.
+      </p>
       {message && (
         <p
           className={
@@ -78,64 +103,97 @@ export default function SeoPage() {
         </p>
       )}
       <div className="space-y-4">
-        {pages.map((seo) => (
-          <div
-            key={seo.pageKey}
-            className="p-4 border border-zinc-200 rounded-lg bg-white flex justify-between items-center"
-          >
+        {pages.map((seo, i) => (
+          <div key={`seo-item-${i}`} className="p-4 border border-zinc-200 rounded-lg bg-white space-y-3">
             <div>
-              <p className="font-semibold text-zinc-900">{seo.pageKey}</p>
-              <p className="text-sm text-zinc-500 truncate max-w-md">{seo.pageTitle}</p>
+              <label className="block text-sm font-medium mb-1">Page key</label>
+              <input
+                type="text"
+                className="w-full px-3 py-2 border border-zinc-300 rounded-lg"
+                value={seo.pageKey}
+                onChange={(e) =>
+                  setList((prev) => {
+                    const next = [...prev];
+                    next[i] = { ...next[i], pageKey: e.target.value };
+                    return next;
+                  })
+                }
+                placeholder="e.g. home, about, contact"
+              />
             </div>
-            <button
-              type="button"
-              onClick={() => setEditing(seo)}
-              className="text-blue-600 hover:underline text-sm shrink-0"
-            >
-              Edit
-            </button>
+            <div>
+              <label className="block text-sm font-medium mb-1">Page title</label>
+              <input
+                type="text"
+                className="w-full px-3 py-2 border border-zinc-300 rounded-lg"
+                value={seo.pageTitle}
+                onChange={(e) =>
+                  setList((prev) => {
+                    const next = [...prev];
+                    next[i] = { ...next[i], pageTitle: e.target.value };
+                    return next;
+                  })
+                }
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium mb-1">Meta description</label>
+              <textarea
+                className="w-full px-3 py-2 border border-zinc-300 rounded-lg min-h-[80px]"
+                value={seo.metaDescription}
+                onChange={(e) =>
+                  setList((prev) => {
+                    const next = [...prev];
+                    next[i] = { ...next[i], metaDescription: e.target.value };
+                    return next;
+                  })
+                }
+              />
+            </div>
+            <div className="flex gap-3">
+              <button
+                type="button"
+                onClick={() => saveOne(seo)}
+                disabled={saving || !seo.pageKey.trim()}
+                className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 disabled:opacity-50"
+              >
+                Save this page
+              </button>
+              <button
+                type="button"
+                onClick={() =>
+                  setList((prev) => prev.filter((_, idx) => idx !== i))
+                }
+                className="px-4 py-2 border border-red-200 text-red-700 rounded-lg text-sm font-medium hover:bg-red-50"
+              >
+                Remove
+              </button>
+            </div>
           </div>
         ))}
       </div>
-      {editing && (
-        <div className="mt-8 p-6 border border-zinc-200 rounded-xl bg-white space-y-4">
-          <h2 className="font-semibold text-zinc-900">Edit: {editing.pageKey}</h2>
-          <div>
-            <label className="block text-sm font-medium mb-1">Page title</label>
-            <input
-              type="text"
-              className="w-full px-3 py-2 border border-zinc-300 rounded-lg"
-              value={editing.pageTitle}
-              onChange={(e) => setEditing((p) => (p ? { ...p, pageTitle: e.target.value } : p))}
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium mb-1">Meta description</label>
-            <textarea
-              className="w-full px-3 py-2 border border-zinc-300 rounded-lg min-h-[80px]"
-              value={editing.metaDescription}
-              onChange={(e) => setEditing((p) => (p ? { ...p, metaDescription: e.target.value } : p))}
-            />
-          </div>
-          <div className="flex gap-3">
-            <button
-              type="button"
-              onClick={() => saveOne(editing)}
-              disabled={saving}
-              className="px-5 py-2.5 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 disabled:opacity-50"
-            >
-              {saving ? "Saving…" : "Save"}
-            </button>
-            <button
-              type="button"
-              onClick={() => setEditing(null)}
-              className="px-5 py-2.5 border border-zinc-300 rounded-lg"
-            >
-              Cancel
-            </button>
-          </div>
-        </div>
-      )}
+      <div className="mt-6 flex flex-wrap items-center gap-3">
+        <button
+          type="button"
+          onClick={() =>
+            setList((prev) => [
+              ...prev,
+              { pageKey: "", pageTitle: "", metaDescription: "" },
+            ])
+          }
+          className="px-4 py-2 border border-zinc-300 rounded-lg text-sm font-medium hover:bg-zinc-50"
+        >
+          Add SEO entry
+        </button>
+        <button
+          type="button"
+          onClick={saveAll}
+          disabled={saving}
+          className="px-5 py-2.5 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 disabled:opacity-50"
+        >
+          {saving ? "Saving…" : "Save all"}
+        </button>
+      </div>
     </div>
   );
 }

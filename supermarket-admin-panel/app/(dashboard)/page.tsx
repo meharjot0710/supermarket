@@ -1,25 +1,15 @@
 import Link from "next/link";
 import {
   Type,
-  Store,
-  Tags,
-  Package,
-  Users,
-  Briefcase,
   Mail,
-  FileText,
+  Image as ImageIcon,
   Search,
 } from "lucide-react";
 
 const sections = [
   { href: "/hero", label: "Hero Banner", desc: "Home page hero text only", icon: Type },
-  { href: "/stores", label: "Store Listings", desc: "Names & ordering", icon: Store },
-  { href: "/brands", label: "Brand Listings", desc: "Names & ordering", icon: Tags },
-  { href: "/products", label: "Products", desc: "Add / edit / remove, descriptions", icon: Package },
-  { href: "/leadership", label: "Leadership", desc: "Names, titles, short messages", icon: Users },
-  { href: "/careers", label: "Careers / Jobs", desc: "Job listings", icon: Briefcase },
-  { href: "/newsletter", label: "Newsletter", desc: "Newsletter content", icon: Mail },
-  { href: "/forms", label: "Forms & Contact", desc: "Form text, confirmation messages", icon: FileText },
+  { href: "/newsletter", label: "Newsletter", desc: "Newsletter items, covers, and PDFs", icon: Mail },
+  { href: "/home-media", label: "Home Media", desc: "How we help you grow images", icon: ImageIcon },
   { href: "/seo", label: "SEO", desc: "Page titles, meta descriptions", icon: Search },
 ];
 

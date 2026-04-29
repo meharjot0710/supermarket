@@ -39,6 +39,7 @@ export function ServiceImageCarousel({ images, alt }: ServiceImageCarouselProps)
           key={`${src}-${i}`}
           src={src}
           alt={alt}
+          unoptimized={src.startsWith("http://") || src.startsWith("https://")}
           fill
           className={`object-cover transition-opacity duration-500 ${
             i === active ? "opacity-100" : "opacity-0"

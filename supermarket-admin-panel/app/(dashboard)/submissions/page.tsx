@@ -37,6 +37,27 @@ function formatDate(iso: string): string {
   }
 }
 
+function labelFromKey(key: string): string {
+  return key
+    .replace(/([a-z])([A-Z])/g, "$1 $2")
+    .replace(/[_-]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .replace(/^./, (c) => c.toUpperCase());
+}
+
+function renderValue(value: unknown): string {
+  if (value === null || value === undefined) return "—";
+  if (typeof value === "string") return value || "—";
+  if (typeof value === "number" || typeof value === "boolean") return String(value);
+  if (Array.isArray(value)) {
+    return value
+      .map((v) => (typeof v === "string" ? v : JSON.stringify(v)))
+      .join(", ");
+  }
+  return JSON.stringify(value);
+}
+
 export default function SubmissionsPage() {
   const [list, setList] = useState<Submission[]>([]);
   const [loading, setLoading] = useState(true);
@@ -147,9 +168,18 @@ export default function SubmissionsPage() {
                 </button>
                 {isOpen && (
                   <div className="px-4 pb-4 pt-0 border-t border-zinc-100">
-                    <pre className="text-xs bg-zinc-50 p-4 rounded-lg overflow-auto max-h-96 text-zinc-700 whitespace-pre-wrap break-words">
-                      {JSON.stringify(sub.payload, null, 2)}
-                    </pre>
+                    <div className="mt-3 rounded-lg border border-zinc-200 bg-zinc-50 p-3">
+                      <div className="grid gap-2 sm:grid-cols-[180px_1fr]">
+                        {Object.entries(sub.payload).map(([key, value]) => (
+                          <div key={key} className="contents">
+                            <p className="text-xs font-semibold uppercase tracking-wide text-zinc-500">
+                              {labelFromKey(key)}
+                            </p>
+                            <p className="text-sm text-zinc-800 break-words">{renderValue(value)}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
                   </div>
                 )}
               </div>

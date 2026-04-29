@@ -1,12 +1,28 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { SiteHeaderBar } from "../components/site-header-bar";
 import { ContactForm } from "./contact-form";
+import { loadSeoByPageKey } from "@/lib/seo-cms";
+import { getSiteUrl } from "@/lib/site-url";
 
-export const metadata = {
-  title: "Contact us | SuperMarketing",
-  description:
-    "Get in touch for wholesale enquiries, partnerships, or general questions.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const siteUrl = getSiteUrl();
+  const seo = await loadSeoByPageKey("contact", {
+    title: "Contact us | SuperMarketing",
+    description: "Get in touch for wholesale enquiries, partnerships, or general questions.",
+  });
+  return {
+    title: seo.title,
+    description: seo.description,
+    alternates: { canonical: "/contact" },
+    openGraph: {
+      title: seo.title,
+      description: seo.description,
+      url: `${siteUrl}/contact`,
+      type: "website",
+    },
+  };
+}
 
 function defaultMessageFor(from: string | undefined) {
   if (from === "brands") {
@@ -28,9 +44,25 @@ export default async function ContactPage({
 }) {
   const sp = (await searchParams) ?? {};
   const initialMessage = defaultMessageFor(sp.from);
+  const siteUrl = getSiteUrl();
+  const contactSchema = {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    name: "Contact SuperMarketing",
+    url: `${siteUrl}/contact`,
+    isPartOf: {
+      "@type": "WebSite",
+      name: "SuperMarketing",
+      url: siteUrl,
+    },
+  };
 
   return (
     <div className="bg-white pb-24">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(contactSchema) }}
+      />
       <SiteHeaderBar />
 
       <section

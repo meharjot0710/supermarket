@@ -68,6 +68,32 @@ export interface FormContent {
   submitButtonText: string;
 }
 
+export interface MediaServiceColumn {
+  title: string;
+  images: string[];
+}
+
+export interface MediaFeaturedItem {
+  name: string;
+  hint: string;
+  image: string;
+}
+
+export interface MediaNewsletterItem {
+  title: string;
+  issue: string;
+  coverImage: string;
+  pdfUrl: string;
+}
+
+export interface HomeMediaContent {
+  _id?: string;
+  services: { columns: MediaServiceColumn[] };
+  featuredProducts: { items: MediaFeaturedItem[] };
+  newsletterCatalogue: { items: MediaNewsletterItem[] };
+  updatedAt?: string;
+}
+
 export interface SeoFields {
   _id?: string;
   pageKey: string; // e.g. "home", "about", "products", "contact"

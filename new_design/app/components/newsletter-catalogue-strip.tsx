@@ -13,6 +13,7 @@ type NewsletterItem = {
 
 export function NewsletterCatalogueStrip({ items }: { items: readonly NewsletterItem[] }) {
   const listRef = useRef<HTMLDivElement | null>(null);
+  const orderedItems = [...items].reverse();
 
   const scrollByCards = (direction: "left" | "right") => {
     const el = listRef.current;
@@ -42,7 +43,7 @@ export function NewsletterCatalogueStrip({ items }: { items: readonly Newsletter
           className="mac-scrollbar-hide relative -mx-5 overflow-x-auto px-5 sm:-mx-8 sm:px-8"
         >
           <div className="inline-flex w-max min-w-full snap-x snap-mandatory justify-center gap-3 pb-2 sm:gap-4">
-            {items.map((item) => (
+            {orderedItems.map((item) => (
               <article
                 key={`${item.title}-${item.issue}`}
                 className="min-w-[230px] snap-start overflow-hidden rounded-sm border border-neutral-200 bg-white sm:min-w-[250px]"
@@ -51,6 +52,10 @@ export function NewsletterCatalogueStrip({ items }: { items: readonly Newsletter
                   <Image
                     src={item.coverImage}
                     alt={`${item.title} ${item.issue}`}
+                    unoptimized={
+                      item.coverImage.startsWith("http://") ||
+                      item.coverImage.startsWith("https://")
+                    }
                     fill
                     className="object-contain"
                     sizes="(max-width: 640px) 70vw, 250px"
@@ -72,6 +77,8 @@ export function NewsletterCatalogueStrip({ items }: { items: readonly Newsletter
                     <a
                       href={item.pdfUrl}
                       download
+                      target="_blank"
+                      rel="noreferrer"
                       className="rounded-md border border-neutral-300 px-2.5 py-1.5 text-[11px] font-semibold uppercase tracking-wide text-neutral-700 transition hover:bg-neutral-100"
                     >
                       Download

@@ -11,6 +11,7 @@ import { TrustedBrandLogoMarquee } from "./trusted-brand-logo-marquee";
 import { TrustedRetailerLogoMarquee } from "./trusted-retailer-logo-marquee";
 import { siteContent } from "../site-content";
 import type { ResolvedHeroContent } from "@/lib/hero-cms";
+import type { ResolvedHomeMedia } from "@/lib/home-media-cms";
 
 function CarouselRow({ children }: { children: React.ReactNode }) {
   return (
@@ -22,13 +23,18 @@ function CarouselRow({ children }: { children: React.ReactNode }) {
 
 type MacMerchandisingLandingProps = {
   heroContent?: ResolvedHeroContent;
+  homeMedia?: ResolvedHomeMedia;
 };
 
 export default function MacMerchandisingLanding({
   heroContent,
+  homeMedia,
 }: MacMerchandisingLandingProps) {
   const { services, trustedBrands, trustedRetailers, hero: defaultHero } = siteContent;
   const hero = heroContent ?? defaultHero;
+  const servicesColumns = homeMedia?.servicesColumns ?? services.columns;
+  const featuredItems = homeMedia?.featuredItems ?? siteContent.featuredProducts.items;
+  const newsletterItems = homeMedia?.newsletterItems ?? siteContent.newsletterCatalogue.items;
 
   return (
     <div className="flex flex-col">
@@ -122,7 +128,7 @@ export default function MacMerchandisingLanding({
           </div>
 
           <div className="grid gap-12 md:grid-cols-3 md:gap-8">
-            {services.columns.map((col, i) => (
+            {servicesColumns.map((col, i) => (
               <ScrollReveal key={col.title} delayMs={i * 120}>
                 <article>
                 <div className="relative mb-6 aspect-[4/3] overflow-hidden rounded-2xl bg-neutral-100 shadow-sm ring-1 ring-black/5">
@@ -166,7 +172,7 @@ export default function MacMerchandisingLanding({
           <h2 className="font-heading mb-8 text-center text-3xl font-bold uppercase tracking-tight text-black sm:text-4xl">
             {siteContent.featuredProducts.title}
           </h2>
-          <FeaturedProductsMarquee items={siteContent.featuredProducts.items} />
+          <FeaturedProductsMarquee items={featuredItems} />
         </ScrollReveal>
       </section>
 
@@ -304,7 +310,7 @@ export default function MacMerchandisingLanding({
         </ScrollReveal>
       </section>
 
-      <NewsletterCatalogueStrip items={siteContent.newsletterCatalogue.items} />
+      <NewsletterCatalogueStrip items={newsletterItems} />
 
       {/* Why partner */}
       <section className="bg-white py-10 sm:py-14">

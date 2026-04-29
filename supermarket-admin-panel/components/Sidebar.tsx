@@ -5,30 +5,20 @@ import { usePathname, useRouter } from "next/navigation";
 import {
   LayoutDashboard,
   Type,
-  Store,
-  Tags,
-  Package,
-  Users,
-  Briefcase,
   Mail,
-  FileText,
   Search,
   Key,
   LogOut,
   Inbox,
+  Image as ImageIcon,
 } from "lucide-react";
 
 const nav = [
   { href: "/", label: "Dashboard", icon: LayoutDashboard },
   { href: "/submissions", label: "Form submissions", icon: Inbox },
   { href: "/hero", label: "Hero Banner", icon: Type },
-  { href: "/stores", label: "Store Listings", icon: Store },
-  { href: "/brands", label: "Brand Listings", icon: Tags },
-  { href: "/products", label: "Products", icon: Package },
-  { href: "/leadership", label: "Leadership", icon: Users },
-  { href: "/careers", label: "Careers / Jobs", icon: Briefcase },
   { href: "/newsletter", label: "Newsletter", icon: Mail },
-  { href: "/forms", label: "Forms & Contact", icon: FileText },
+  { href: "/home-media", label: "Home Media", icon: ImageIcon },
   { href: "/seo", label: "SEO", icon: Search },
   { href: "/change-password", label: "Change password", icon: Key },
 ];

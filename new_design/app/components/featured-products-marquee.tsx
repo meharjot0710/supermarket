@@ -70,6 +70,7 @@ export function FeaturedProductsMarquee({ items }: { items: readonly FeaturedIte
                 <Image
                   src={item.image}
                   alt={item.name}
+                  unoptimized={item.image.startsWith("http://") || item.image.startsWith("https://")}
                   fill
                   className="object-cover"
                   sizes="220px"

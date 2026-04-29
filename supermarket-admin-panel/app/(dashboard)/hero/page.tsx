@@ -67,13 +67,7 @@ export default function HeroPage() {
       </p>
       <div className="space-y-5">
         {[
-          { key: "tagline", label: "Tagline (small caps)", value: d.tagline },
-          { key: "headline", label: "Headline", value: d.headline },
           { key: "subtitle", label: "Subtitle", value: d.subtitle },
-          { key: "ctaPrimaryText", label: "Primary button text", value: d.ctaPrimaryText },
-          { key: "ctaSecondaryText", label: "Secondary button text", value: d.ctaSecondaryText },
-          { key: "insightLabel", label: "Floating insight label", value: d.insightLabel },
-          { key: "insightQuote", label: "Floating insight quote", value: d.insightQuote },
         ].map(({ key, label, value }) => (
           <div key={key}>
             <label className="block text-sm font-medium text-zinc-700 mb-1">{label}</label>

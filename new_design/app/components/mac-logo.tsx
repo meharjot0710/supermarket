@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const logoSizeClasses = {
   default: "h-10 w-auto sm:h-12",
-  hero: "h-8 w-auto sm:h-9 md:h-11",
+  hero: "h-10 w-auto sm:h-11 md:h-14",
 } as const;
 
 type MacLogoProps = {

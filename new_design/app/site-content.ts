@@ -174,7 +174,7 @@ export const siteContent = {
     ],
     stats: [
       { v: "25+", l: "Years experience" },
-      { v: "1,000+", l: "Products" },
+      { v: "1,200+", l: "Customers" },
       { v: "50+", l: "Brands" },
     ],
     statsEyebrow: "Trusted nationwide",
