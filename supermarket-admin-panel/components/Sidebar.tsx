@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import {
   LayoutDashboard,
@@ -23,9 +24,18 @@ const nav = [
   { href: "/change-password", label: "Change password", icon: Key },
 ];
 
-export default function Sidebar() {
+type SidebarProps = {
+  mobileOpen?: boolean;
+  onMobileClose?: () => void;
+};
+
+export default function Sidebar({ mobileOpen = false, onMobileClose }: SidebarProps) {
   const pathname = usePathname();
   const router = useRouter();
+
+  useEffect(() => {
+    onMobileClose?.();
+  }, [pathname, onMobileClose]);
 
   const handleLogout = async () => {
     await fetch("/api/auth/logout", { method: "POST" });
@@ -34,7 +44,12 @@ export default function Sidebar() {
   };
 
   return (
-    <aside className="w-64 min-h-screen bg-zinc-900 text-zinc-100 flex flex-col border-r border-zinc-800">
+    <aside
+      id="admin-sidebar"
+      className={`fixed inset-y-0 left-0 z-50 flex h-screen w-64 max-w-[min(16rem,100vw-3rem)] shrink-0 flex-col border-r border-zinc-800 bg-zinc-900 text-zinc-100 transition-transform duration-200 ease-out lg:static lg:z-auto lg:h-auto lg:min-h-screen lg:max-w-none lg:translate-x-0 ${
+        mobileOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
+      }`}
+    >
       <div className="p-6 border-b border-zinc-800">
         <h1 className="font-bold text-lg tracking-tight">Supermarket CMS</h1>
         <p className="text-xs text-zinc-500 mt-0.5">Content only · No layout/edit</p>

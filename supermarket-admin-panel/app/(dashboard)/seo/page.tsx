@@ -79,7 +79,7 @@ export default function SeoPage() {
 
   if (loading) {
     return (
-      <div className="p-8">
+      <div className="p-4 sm:p-8">
         <p className="text-zinc-500">Loading…</p>
       </div>
     );
@@ -88,7 +88,7 @@ export default function SeoPage() {
   const pages = list.length ? list : defaultPages;
 
   return (
-    <div className="p-8 md:p-12 max-w-3xl">
+    <div className="max-w-3xl p-4 sm:p-8 md:p-12">
       <h1 className="text-2xl font-bold text-zinc-900 mb-2">SEO</h1>
       <p className="text-zinc-600 text-sm mb-6">
         Enter SEO fields directly for each page. Layout and templates are fixed.

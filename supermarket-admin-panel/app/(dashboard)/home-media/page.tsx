@@ -74,10 +74,10 @@ export default function HomeMediaPage() {
     }
   };
 
-  if (loading) return <div className="p-8 text-zinc-500">Loading…</div>;
+  if (loading) return <div className="p-4 text-zinc-500 sm:p-8">Loading…</div>;
 
   return (
-    <div className="max-w-5xl p-8 md:p-12 space-y-8">
+    <div className="max-w-5xl space-y-8 p-4 sm:p-8 md:p-12">
       <div>
         <h1 className="text-2xl font-bold text-zinc-900 mb-2">Home Media (Bunny.net)</h1>
         <p className="text-sm text-zinc-600">

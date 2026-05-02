@@ -93,14 +93,14 @@ export default function ProductsPage() {
 
   if (loading) {
     return (
-      <div className="p-8">
+      <div className="p-4 sm:p-8">
         <p className="text-zinc-500">Loading…</p>
       </div>
     );
   }
 
   return (
-    <div className="p-8 md:p-12 max-w-4xl">
+    <div className="max-w-4xl p-4 sm:p-8 md:p-12">
       <h1 className="text-2xl font-bold text-zinc-900 mb-2">Products</h1>
       <p className="text-zinc-600 text-sm mb-6">
         Add / edit / remove products and descriptions. Images and layout are fixed on the main site.
@@ -142,8 +142,8 @@ export default function ProductsPage() {
           />
         )}
       </div>
-      <div className="border border-zinc-200 rounded-lg overflow-hidden bg-white">
-        <table className="w-full text-sm">
+      <div className="overflow-x-auto rounded-lg border border-zinc-200 bg-white [-webkit-overflow-scrolling:touch]">
+        <table className="w-full min-w-[640px] text-sm">
           <thead className="bg-zinc-100 border-b border-zinc-200">
             <tr>
               <th className="text-left p-3 font-medium">Name</th>
@@ -308,7 +308,7 @@ function ProductForm({
           />
         </div>
       )}
-      <div className="flex gap-3 pt-2">
+      <div className="flex flex-wrap gap-3 pt-2">
         <button
           type="submit"
           disabled={saving}

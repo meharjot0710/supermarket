@@ -15,7 +15,7 @@ const sections = [
 
 export default function Home() {
   return (
-    <div className="p-8 md:p-12">
+    <div className="p-4 sm:p-8 md:p-12">
       <div className="max-w-4xl">
         <h1 className="text-2xl font-bold text-zinc-900 mb-2">CMS Dashboard</h1>
         <p className="text-zinc-600 mb-8">

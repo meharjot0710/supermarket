@@ -1,11 +1,10 @@
 import { NextResponse } from "next/server";
-import { getCookieName } from "@/lib/auth";
+import { getCookieName, sessionCookieBase } from "@/lib/auth";
 
-export async function POST() {
+export async function POST(request: Request) {
   const res = NextResponse.json({ success: true });
   res.cookies.set(getCookieName(), "", {
-    httpOnly: true,
-    path: "/",
+    ...sessionCookieBase(request),
     maxAge: 0,
   });
   return res;

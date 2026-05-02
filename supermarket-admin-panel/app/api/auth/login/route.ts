@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
-import { signToken, signSetupToken, getCookieName } from "@/lib/auth";
+import { signToken, signSetupToken, getCookieName, sessionCookieBase } from "@/lib/auth";
 import { getAdminFromDb } from "@/lib/getAdmin";
 
 export async function POST(request: Request) {
@@ -50,10 +50,7 @@ export async function POST(request: Request) {
       const cookieName = getCookieName();
       const res = NextResponse.json({ success: true });
       res.cookies.set(cookieName, token, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "lax",
-        path: "/",
+        ...sessionCookieBase(request),
         maxAge: 60 * 60 * 24, // 24h
       });
       return res;

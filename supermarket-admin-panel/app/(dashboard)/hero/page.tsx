@@ -51,7 +51,7 @@ export default function HeroPage() {
 
   if (loading) {
     return (
-      <div className="p-8">
+      <div className="p-4 sm:p-8">
         <p className="text-zinc-500">Loading…</p>
       </div>
     );
@@ -60,7 +60,7 @@ export default function HeroPage() {
   const d = data ?? defaultHero;
 
   return (
-    <div className="p-8 md:p-12 max-w-2xl">
+    <div className="max-w-2xl p-4 sm:p-8 md:p-12">
       <h1 className="text-2xl font-bold text-zinc-900 mb-2">Hero Banner (text only)</h1>
       <p className="text-zinc-600 text-sm mb-6">
         Editable text only. Images and layout are fixed on the main site.

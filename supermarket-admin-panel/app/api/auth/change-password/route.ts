@@ -1,6 +1,13 @@
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
-import { signToken, verifyToken, verifySetupToken, getCookieName, getTokenFromCookie } from "@/lib/auth";
+import {
+  signToken,
+  verifyToken,
+  verifySetupToken,
+  getCookieName,
+  getTokenFromCookie,
+  sessionCookieBase,
+} from "@/lib/auth";
 import { getAdminFromDb, saveAdminToDb } from "@/lib/getAdmin";
 
 export async function POST(request: Request) {
@@ -84,10 +91,7 @@ export async function POST(request: Request) {
     const cookieName = getCookieName();
     const res = NextResponse.json({ success: true });
     res.cookies.set(cookieName, authToken, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
-      path: "/",
+      ...sessionCookieBase(request),
       maxAge: 60 * 60 * 24,
     });
     return res;

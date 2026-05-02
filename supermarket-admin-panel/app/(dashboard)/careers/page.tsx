@@ -63,14 +63,14 @@ export default function CareersPage() {
 
   if (loading) {
     return (
-      <div className="p-8">
+      <div className="p-4 sm:p-8">
         <p className="text-zinc-500">Loading…</p>
       </div>
     );
   }
 
   return (
-    <div className="p-8 md:p-12 max-w-3xl">
+    <div className="max-w-3xl p-4 sm:p-8 md:p-12">
       <h1 className="text-2xl font-bold text-zinc-900 mb-2">Careers / job listings</h1>
       <p className="text-zinc-600 text-sm mb-6">Add and edit job listings.</p>
       {message && (
@@ -181,7 +181,7 @@ function JobForm({
           required
         />
       </div>
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div>
           <label className="block text-sm font-medium mb-1">Location</label>
           <input

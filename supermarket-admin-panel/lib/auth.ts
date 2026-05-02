@@ -16,6 +16,38 @@ export function getCookieName() {
   return COOKIE_NAME;
 }
 
+/**
+ * Whether the incoming request is served over HTTPS (public URL), including
+ * common reverse-proxy headers. Using this for the session cookie `secure`
+ * flag avoids broken logins when NODE_ENV is production but the app sees
+ * http internally, or when the site is served over HTTP.
+ */
+export function isHttpsRequest(request: Request): boolean {
+  const forwarded = request.headers.get("x-forwarded-proto");
+  if (forwarded) {
+    const first = forwarded.split(",")[0]?.trim().toLowerCase();
+    if (first === "https") return true;
+    if (first === "http") return false;
+  }
+  const ssl = request.headers.get("x-forwarded-ssl")?.trim().toLowerCase();
+  if (ssl === "on") return true;
+  try {
+    return new URL(request.url).protocol === "https:";
+  } catch {
+    return false;
+  }
+}
+
+/** Consistent Set-Cookie / delete-cookie attributes for the admin session. */
+export function sessionCookieBase(request: Request) {
+  return {
+    httpOnly: true as const,
+    secure: isHttpsRequest(request),
+    sameSite: "lax" as const,
+    path: "/",
+  };
+}
+
 export async function signToken(username: string): Promise<string> {
   return new SignJWT({ sub: username })
     .setProtectedHeader({ alg: "HS256" })

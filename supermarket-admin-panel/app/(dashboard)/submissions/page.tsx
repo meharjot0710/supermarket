@@ -88,14 +88,14 @@ export default function SubmissionsPage() {
 
   if (loading) {
     return (
-      <div className="p-8">
+      <div className="p-4 sm:p-8">
         <p className="text-zinc-500">Loading…</p>
       </div>
     );
   }
 
   return (
-    <div className="p-8 md:p-12 max-w-4xl">
+    <div className="max-w-4xl p-4 sm:p-8 md:p-12">
       <h1 className="text-2xl font-bold text-zinc-900 mb-2">Form submissions</h1>
       <p className="text-zinc-600 text-sm mb-6">
         Data submitted from the website: Retailer Signup and Contact forms.
@@ -149,7 +149,7 @@ export default function SubmissionsPage() {
                 <button
                   type="button"
                   onClick={() => toggle(sub._id)}
-                  className="w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-zinc-50"
+                  className="flex w-full flex-wrap items-center gap-3 px-4 py-3 text-left hover:bg-zinc-50 sm:flex-nowrap"
                 >
                   {isOpen ? (
                     <ChevronDown size={18} className="text-zinc-400 shrink-0" />
